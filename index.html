@@ -1,0 +1,3061 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Saha</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#fa2d48",
+                        "background-light": "#000000",
+                        "background-dark": "#000000",
+                        "sf-gray": "#f5f5f7",
+                        "surface": "#1c1c1e",
+                        "surface-2": "#1e1e1e",
+                        "surface-3": "#252525",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem", "lg": "1.5rem", "xl": "2rem", "2xl": "2.5rem", "full": "9999px"
+                    },
+                    boxShadow: {
+                        "gloss": "0 8px 32px 0 rgba(0,0,0,0.3)",
+                        "card": "0 0 0 1px rgba(255,255,255,0.06)",
+                        "glow": "0 0 30px rgba(250,45,72,0.15)",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #161616;
+            color: #f5f5f7;
+            min-height: max(884px, 100dvh);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .glass-nav {
+            background: rgba(18, 18, 18, 0.82);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* ===== GLOBAL DARK OVERRIDES ===== */
+        .bg-white {
+            background-color: #1a1a1a !important;
+        }
+
+        .bg-white\/80 {
+            background-color: rgba(26, 26, 26, 0.8) !important;
+        }
+
+        .bg-white\/90 {
+            background-color: rgba(26, 26, 26, 0.92) !important;
+        }
+
+        .bg-white\/50 {
+            background-color: transparent !important;
+        }
+
+        .bg-slate-50 {
+            background-color: #151515 !important;
+        }
+
+        .bg-slate-50\/50 {
+            background-color: rgba(21, 21, 21, 0.5) !important;
+        }
+
+        .bg-slate-100 {
+            background-color: #1e1e1e !important;
+        }
+
+        .bg-slate-200 {
+            background-color: #252525 !important;
+        }
+
+        .bg-slate-200\/50 {
+            background-color: rgba(37, 37, 37, 0.5) !important;
+        }
+
+        .text-slate-900 {
+            color: #f5f5f7 !important;
+        }
+
+        .text-slate-800 {
+            color: #e5e5e7 !important;
+        }
+
+        .text-slate-700 {
+            color: #d1d1d6 !important;
+        }
+
+        .text-slate-600 {
+            color: #aeaeb2 !important;
+        }
+
+        .text-slate-500 {
+            color: #8e8e93 !important;
+        }
+
+        .text-slate-400 {
+            color: #636366 !important;
+        }
+
+        .text-sf-gray {
+            color: #f5f5f7 !important;
+        }
+
+        .text-sf-gray\/70 {
+            color: rgba(245, 245, 247, 0.5) !important;
+        }
+
+        .text-sf-gray\/50 {
+            color: rgba(245, 245, 247, 0.35) !important;
+        }
+
+        .border-slate-100 {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .border-slate-200 {
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        .border-slate-300 {
+            border-color: rgba(255, 255, 255, 0.12) !important;
+        }
+
+        .divide-y>*+* {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .border-y {
+            border-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .border-t {
+            border-top-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .border-b {
+            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .bg-\[\#eaf4ff\] {
+            background-color: rgba(250, 45, 72, 0.12) !important;
+        }
+
+        .bg-\[\#f0f6ff\] {
+            background-color: rgba(250, 45, 72, 0.1) !important;
+        }
+
+        .bg-\[\#f4f4f5\] {
+            background-color: #1e1e1e !important;
+        }
+
+        .bg-\[\#fff1f2\] {
+            background-color: rgba(239, 68, 68, 0.12) !important;
+        }
+
+        .bg-orange-500 {
+            background-color: #fa2d48 !important;
+        }
+
+        .bg-orange-50 {
+            background-color: rgba(250, 45, 72, 0.12) !important;
+        }
+
+        .text-orange-600 {
+            color: #fa2d48 !important;
+        }
+
+        .bg-purple-600 {
+            background-color: #636366 !important;
+        }
+
+        .bg-purple-50 {
+            background-color: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        .text-purple-600 {
+            color: #aeaeb2 !important;
+        }
+
+        .bg-emerald-500 {
+            background-color: #f5f5f7 !important;
+        }
+
+        .bg-emerald-50 {
+            background-color: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        .text-emerald-600 {
+            color: #f5f5f7 !important;
+        }
+
+        .bg-blue-100 {
+            background-color: rgba(250, 45, 72, 0.12) !important;
+        }
+
+        .bg-green-100 {
+            background-color: rgba(250, 45, 72, 0.1) !important;
+        }
+
+        .text-green-800 {
+            color: #fa2d48 !important;
+        }
+
+        .bg-yellow-100 {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .text-yellow-800 {
+            color: #aeaeb2 !important;
+        }
+
+        .bg-red-100 {
+            background-color: rgba(250, 45, 72, 0.1) !important;
+        }
+
+        .text-red-800 {
+            color: #fa2d48 !important;
+        }
+
+        .bg-amber-100 {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .bg-amber-50 {
+            background-color: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        .text-amber-600 {
+            color: #8e8e93 !important;
+        }
+
+        .bg-purple-100 {
+            background-color: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        .bg-emerald-100 {
+            background-color: rgba(250, 45, 72, 0.1) !important;
+        }
+
+        .text-emerald-500 {
+            color: #fa2d48 !important;
+        }
+
+        .text-amber-400 {
+            color: #8e8e93 !important;
+        }
+
+        .shadow-sm {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+        }
+
+        .shadow-md {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .shadow-lg {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        .shadow-2xl {
+            box-shadow: none !important;
+        }
+
+        .hover\:bg-white:hover {
+            background-color: #1e1e1e !important;
+        }
+
+        .hover\:bg-slate-50:hover {
+            background-color: #1e1e1e !important;
+        }
+
+        .hover\:bg-slate-100:hover {
+            background-color: #252525 !important;
+        }
+
+        .hover\:bg-slate-200:hover {
+            background-color: #48484a !important;
+        }
+
+        .hover\:bg-primary\/90:hover {
+            background-color: rgba(250, 45, 72, 0.9) !important;
+        }
+
+        .hover\:shadow-md:hover {
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        .hover\:shadow-gloss:hover {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        .hover\:text-primary\/80:hover {
+            color: rgba(250, 45, 72, 0.8) !important;
+        }
+
+        .hover\:bg-orange-100:hover {
+            background-color: rgba(250, 45, 72, 0.15) !important;
+        }
+
+        .hover\:bg-orange-600:hover {
+            background-color: #d4263e !important;
+        }
+
+        .hover\:bg-purple-100:hover {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .hover\:bg-purple-700:hover {
+            background-color: #48484a !important;
+        }
+
+        .hover\:bg-emerald-100:hover {
+            background-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .hover\:bg-emerald-600:hover {
+            background-color: #e5e5e7 !important;
+        }
+
+        .hover\:bg-blue-100:hover {
+            background-color: rgba(250, 45, 72, 0.2) !important;
+        }
+
+        .hover\:border-primary:hover {
+            border-color: #fa2d48 !important;
+        }
+
+        .hover\:text-primary:hover {
+            color: #fa2d48 !important;
+        }
+
+        .focus\:bg-primary:focus {
+            background-color: #fa2d48 !important;
+        }
+
+        .focus\:text-white:focus {
+            color: #fff !important;
+        }
+
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(250, 45, 72, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(250, 45, 72, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(250, 45, 72, 0);
+            }
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-sheet {
+            width: 100%;
+            max-width: 448px;
+            max-height: 92vh;
+            background: #1c1c1e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: none;
+            border-radius: 1.5rem 1.5rem 0 0;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(.32, .72, 0, 1);
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            padding: 1.5rem;
+        }
+
+        .modal-overlay.active .modal-sheet {
+            transform: translateY(0);
+        }
+
+        .modal-center {
+            width: calc(100% - 48px);
+            max-width: 380px;
+            background: #1e1e1e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(.32, .72, 0, 1);
+            padding: 2rem;
+            margin: auto;
+            text-align: center;
+        }
+
+        .modal-overlay.active .modal-center {
+            transform: scale(1);
+        }
+
+        .sheet-handle {
+            width: 36px;
+            height: 5px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto 1rem;
+        }
+
+        #toast-container {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .toast {
+            background: rgba(44, 44, 46, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #f5f5f7;
+            padding: 12px 20px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            animation: toastIn 0.3s ease, toastOut 0.3s ease 2.7s forwards;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes toastOut {
+            to {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+        }
+
+        .star-btn {
+            color: #48484a;
+            transition: color 0.15s, transform 0.15s;
+            cursor: pointer;
+        }
+
+        .star-btn.active {
+            color: #ffd60a;
+        }
+
+        .chat-bubble {
+            max-width: 75%;
+            padding: 10px 14px;
+            border-radius: 18px;
+            font-size: 15px;
+            line-height: 1.4;
+            margin-bottom: 6px;
+            animation: bubbleIn 0.25s ease;
+        }
+
+        .chat-bubble.sent {
+            background: #fa2d48;
+            color: white;
+            border-bottom-right-radius: 4px;
+            align-self: flex-end;
+        }
+
+        .chat-bubble.received {
+            background: #1e1e1e;
+            color: #f5f5f7;
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+        }
+
+        @keyframes bubbleIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+            animation: viewFade 0.4s ease;
+        }
+
+        @keyframes viewFade {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.85);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .scale-in {
+            animation: scaleIn 0.4s cubic-bezier(.32, .72, 0, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .slide-up {
+            animation: slideUp 0.35s cubic-bezier(.32, .72, 0, 1);
+        }
+
+        .tab-section {
+            display: none;
+        }
+
+        .tab-section.active {
+            display: block;
+        }
+
+        .bg-gradient-to-br.from-\[\#1b3c58\] {
+            background: linear-gradient(135deg, #1c1c1e 0%, #1e1e1e 50%, #1c1c1e 100%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="date"],
+        textarea,
+        select {
+            background-color: #1e1e1e !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+            color: #f5f5f7 !important;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #636366 !important;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 3px;
+        }
+
+        details {
+            background: #1e1e1e;
+            border-radius: 12px;
+        }
+
+        details summary {
+            cursor: pointer;
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .group:active {
+                transform: scale(0.97);
+                transition: transform 0.15s ease;
+            }
+
+            button:active,
+            a:active,
+            [onclick]:active {
+                opacity: 0.85;
+                transform: scale(0.96);
+                transition: all 0.1s ease;
+            }
+
+            .group:active img {
+                transform: scale(1.05);
+                transition: transform 0.3s ease;
+            }
+
+            .shadow-card:active {
+                box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+                transform: translateY(-2px) scale(0.98);
+                transition: all 0.15s ease;
+            }
+
+            .flex-wrap button:active {
+                background-color: #fa2d48 !important;
+                color: white !important;
+                border-color: #fa2d48 !important;
+                transition: all 0.1s ease;
+            }
+
+            .rounded-full:active,
+            .rounded-xl:active,
+            .rounded-2xl:active {
+                transform: scale(0.95);
+                transition: transform 0.1s ease;
+            }
+
+            .nav-btn:active span:first-child {
+                transform: scale(1.15);
+                transition: transform 0.15s ease;
+            }
+
+            .divide-y>div:active {
+                background-color: #1e1e1e !important;
+                transition: background-color 0.1s ease;
+            }
+
+            .time-slot-btn:active {
+                background-color: #fa2d48;
+                color: white;
+                border-color: #fa2d48;
+            }
+
+            .star-btn:active {
+                transform: scale(1.3);
+                transition: transform 0.1s ease;
+            }
+
+            #chat-input+button:active {
+                transform: scale(0.9);
+                transition: transform 0.1s ease;
+            }
+
+            .cursor-pointer:active {
+                background-color: rgba(255, 255, 255, 0.04);
+                transition: background-color 0.1s ease;
+            }
+
+            .modal-sheet button:active,
+            .modal-center button:active {
+                transform: scale(0.94);
+                transition: transform 0.08s ease;
+            }
+
+            details summary:active {
+                background-color: #252525;
+                transition: background-color 0.1s ease;
+            }
+
+            #notif-list>div:active {
+                background-color: rgba(250, 45, 72, 0.08);
+                transition: background-color 0.1s ease;
+            }
+        }
+
+        @keyframes tapRipple {
+            0% {
+                box-shadow: 0 0 0 0 rgba(250, 45, 72, 0.35);
+            }
+
+            100% {
+                box-shadow: 0 0 0 12px rgba(250, 45, 72, 0);
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .bg-primary:active {
+                animation: tapRipple 0.4s ease-out;
+            }
+        }
+
+        button,
+        a,
+        [onclick],
+        .group,
+        .nav-btn,
+        .cursor-pointer {
+            transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+        }
+    </style>
+</head>
+
+<body class="font-display text-slate-900 selection:bg-primary/20">
+
+    <!-- APP CONTAINER -->
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden pb-24 md:max-w-md md:mx-auto">
+
+        <!-- VIEWS -->
+        <!-- START_VIEW_DISCOVERY -->
+        <div id="view-discovery" class="view">
+            <header class="sticky top-0 z-40 w-full glass-nav px-5 pt-12 pb-4 transition-all duration-300">
+                <div class="flex items-center justify-between">
+                    <div class="flex flex-col">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-sf-gray/70">Monday, Oct
+                            24</span>
+                        <h1 class="text-3xl font-bold tracking-tight text-sf-gray">Saha</h1>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button onclick="openModal('modal-notifications')"
+                            class="relative h-10 w-10 rounded-full bg-white/80 border border-slate-200 shadow-sm flex items-center justify-center text-slate-600 hover:bg-white transition">
+                            <span class="material-symbols-outlined text-xl">notifications</span>
+                            <div class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full pulse-dot"></div>
+                        </button>
+                        <div class="relative h-10 w-10 overflow-hidden rounded-full border border-slate-200 shadow-sm cursor-pointer"
+                            onclick="navigate('profile')">
+                            <img alt="User Profile" class="h-full w-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhIaDyK5O9K4pdPhW7rBuXAyfNEtnP8A1lvzCXIB0L6fMTAbSkJm8jLWNrfuboNcFgUzRrxTwZBlkXH6mqeEEVl7Bi2bImpwhMcv8yIljfANu8DrLpPZqjb32Mdn9h6ny5_XVZ_8sPykH2fPpxkwG2F39de5TUuXOfeKyLBon-JzI-aBW3kcNfDV7KPn7dbPTaXi7w4APQ2nf7Q87iWfTvcM2MA7lFnSH3sZwj6M1Ky4owpx2HcJg0iMWPuiDZFB9TomwHjaoY1Ao" />
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="flex flex-col gap-8 px-5 pt-4">
+                <section class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold tracking-tight text-sf-gray">Featured Helpers</h2>
+                        <a class="text-[17px] font-normal text-primary hover:text-primary/80 transition-colors cursor-pointer"
+                            onclick="navigate('search-other')">See All</a>
+                    </div>
+                    <div class="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 scrollbar-hide">
+                        <div onclick="navigate('math-detail')"
+                            class="relative flex w-[85vw] md:w-[350px] flex-none snap-center flex-col justify-end overflow-hidden rounded-[20px] bg-slate-200 shadow-gloss aspect-video group cursor-pointer">
+                            <img alt="Student studying with tutor"
+                                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxqqbi_r1gIFGLnXu4bEtna6l-uTHprcW6l9qp8zc26IUqK9q5Fui3OGtfqVcY76zQD_Q0Wlo409VL18rPHa0Gce5YMqrvbBptGf_v1l6z_lSA-IN18HJEUDAxKM9_SuFeMo2jFdypRU5hyMwNheqEEJ83pAjzqzwdlnsv9BaOvpZPbdy9Vg6J1HrA_ZHt4YxDXRppdpKNrL5MtQFsvCgtBhOFh1HhnD_tc29prgtKZ3jn_sz4btZQSRa1k_anlOPLDHAYtsTk3CY" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+                            <div class="relative p-5">
+                                <span
+                                    class="mb-2 inline-block rounded-full bg-primary/90 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white backdrop-blur-sm">Education</span>
+                                <h3 class="text-2xl font-bold leading-tight text-white">Ace Your Math Exam</h3>
+                                <p class="mt-1 line-clamp-1 text-sm font-medium text-slate-200">Top-rated tutors in your
+                                    area starting at ₹200/hr</p>
+                            </div>
+                        </div>
+                        <div onclick="navigate('category-tech')"
+                            class="relative flex w-[85vw] md:w-[350px] flex-none snap-center flex-col justify-end overflow-hidden rounded-[20px] bg-slate-200 shadow-gloss aspect-video group cursor-pointer">
+                            <img alt="IT support specialist"
+                                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXe1JMd1yCkeik0kZS-AuQWiUyJ3rCBmJ9a_pKD3xAaxH2Si5CLxinOpuec--xS6B2UDf8lkwuvNj4kvK4Aju4JZp7yXNfCljporCR9YMB2hVT_J5I0nYlO9FWqye3v8MJ3ikK98GzuZsOssHxp1p5uiRaz5ESWod-TUt959gzC3Adb3Ipl7U2jNFSEZrshJAKCk4DrxiG3b7nuDvNj6AHPsy2ME6iLVVDeu-spvG2wgYPDGIWkv7C4WxUfvNHYDsnkfPo19Aiw-g" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+                            <div class="relative p-5">
+                                <span
+                                    class="mb-2 inline-block rounded-full bg-white/20 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white backdrop-blur-sm">Tech
+                                    Support</span>
+                                <h3 class="text-2xl font-bold leading-tight text-white">Wifi Setup &amp; Fixes</h3>
+                                <p class="mt-1 line-clamp-1 text-sm font-medium text-slate-200">Local experts available
+                                    for same-day visits</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold tracking-tight text-sf-gray">Made for You</h2>
+                    </div>
+                    <div class="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 scrollbar-hide">
+                        <div onclick="navigate('category-groceries')"
+                            class="group relative flex w-36 flex-none snap-start flex-col items-center justify-center gap-3 overflow-hidden rounded-xl bg-white p-4 shadow-card hover:shadow-gloss transition-all cursor-pointer border border-slate-100">
+                            <div
+                                class="flex h-12 w-12 items-center justify-center rounded-full bg-purple-100 text-purple-600">
+                                <span class="material-symbols-outlined text-3xl">shopping_basket</span>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-sm font-bold text-sf-gray">Groceries</h3>
+                                <p class="text-[10px] text-slate-500">Delivery &amp; Pickup</p>
+                            </div>
+                        </div>
+                        <div onclick="navigate('math-detail')"
+                            class="group relative flex w-36 flex-none snap-start flex-col items-center justify-center gap-3 overflow-hidden rounded-xl bg-white p-4 shadow-card hover:shadow-gloss transition-all cursor-pointer border border-slate-100">
+                            <div
+                                class="flex h-12 w-12 items-center justify-center rounded-full bg-purple-100 text-purple-600">
+                                <span class="material-symbols-outlined text-3xl">school</span>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-sm font-bold text-sf-gray">Math Tutor</h3>
+                                <p class="text-[10px] text-slate-500">K-12 &amp; College</p>
+                            </div>
+                        </div>
+                        <div onclick="navigate('category-tech')"
+                            class="group relative flex w-36 flex-none snap-start flex-col items-center justify-center gap-3 overflow-hidden rounded-xl bg-white p-4 shadow-card hover:shadow-gloss transition-all cursor-pointer border border-slate-100">
+                            <div
+                                class="flex h-12 w-12 items-center justify-center rounded-full bg-purple-100 text-purple-600">
+                                <span class="material-symbols-outlined text-3xl">devices</span>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-sm font-bold text-sf-gray">Tech Support</h3>
+                                <p class="text-[10px] text-slate-500">Hardware &amp; Soft.</p>
+                            </div>
+                        </div>
+                        <div onclick="navigate('category-pets')"
+                            class="group relative flex w-36 flex-none snap-start flex-col items-center justify-center gap-3 overflow-hidden rounded-xl bg-white p-4 shadow-card hover:shadow-gloss transition-all cursor-pointer border border-slate-100">
+                            <div
+                                class="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                                <span class="material-symbols-outlined text-3xl">pets</span>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-sm font-bold text-sf-gray">Dog Walking</h3>
+                                <p class="text-[10px] text-slate-500">Walks &amp; Sitting</p>
+                            </div>
+                        </div>
+                        <div onclick="navigate('search-other')"
+                            class="group relative flex w-36 flex-none snap-start flex-col items-center justify-center gap-3 overflow-hidden rounded-xl bg-white p-4 shadow-card hover:shadow-gloss transition-all cursor-pointer border border-slate-100 border-[1.5px] border-dashed border-slate-300">
+                            <div
+                                class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-500">
+                                <span class="material-symbols-outlined text-3xl">search</span>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="text-sm font-bold text-sf-gray">Other</h3>
+                                <p class="text-[10px] text-slate-500">Custom &amp; Search</p>
+                            </div>
+                        </div>
+                        <div class="w-1 flex-none"></div>
+                    </div>
+                </section>
+                <section class="flex flex-col gap-4 pb-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold tracking-tight text-sf-gray">New &amp; Noteworthy</h2>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div
+                            class="group flex items-center gap-4 rounded-xl bg-white p-3 pr-4 shadow-card hover:shadow-md transition-all active:scale-[0.98] border border-slate-100">
+                            <img alt="Gardening expert thumbnail" class="h-16 w-16 rounded-lg object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2IRoUhRFjQB7mLrQASs2M2T7H4gocP7s_w7VlGJmM6rVI0fH_YERsYPAMGnIwxyFdJcUNEPznS5GjC_4euoqkxjvY_Nf66LueCRlm53akAwzz-6RVgenmRhpQbzh9gZB5OazUfZmKTDEJtW5TV-CeYnCZF6zic_TYy05AU06W_v3Af-1pufEO9ORP37lp_nu_G_1vYMqRekXIBDWe-vu491u5h7O1QA91FNM2gadaPMsLqAF_dDYX7Toou307G_e-XPMd9oZACik" />
+                            <div class="flex flex-1 flex-col">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-1">
+                                        <h3 class="font-bold text-sf-gray">Sarah Jenkins</h3>
+                                        <span class="material-symbols-outlined filled text-emerald-500 text-[18px]"
+                                            style="font-variation-settings: 'FILL' 1;">verified</span>
+                                    </div>
+                                    <div class="flex items-center gap-1 text-amber-400">
+                                        <span class="material-symbols-outlined filled text-[16px]"
+                                            style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="text-xs font-bold text-sf-gray">4.9</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-slate-500">Landscape &amp; Gardening</p>
+                                <p class="mt-1 text-xs font-medium text-primary">₹350/hr</p>
+                            </div>
+                            <button onclick="event.stopPropagation(); addHelper(this, 'Sarah Jenkins')"
+                                class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-sf-gray transition-colors group-hover:bg-primary/10 group-hover:text-primary border border-slate-200">
+                                <span class="material-symbols-outlined text-lg">add</span>
+                            </button>
+                        </div>
+                        <div onclick="navigate('user-details')"
+                            class="group flex items-center gap-4 rounded-xl bg-white p-3 pr-4 shadow-card hover:shadow-md transition-all active:scale-[0.98] border border-slate-100">
+                            <img alt="Plumbing expert thumbnail" class="h-16 w-16 rounded-lg object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN1SJuf9WcexBYjJMw52cLIQauoA80NRAK48sjiFR1eoNgr7lUMfoQDpszfgH7Hmnr4arerpnkyZiH6xT1r8Al1UxFlE-GQYEBLSKztwz3qsTUo3hKjUm7Py4O0zo_AlcA5kmhgBAgYdI3hyPyTHxKNCajvIsR2r968H45Pfyx9xvsT6IJL8ZJVYr4j7V_aPu2So8f7fkeRhX_sEHk_xd8Mp5yB0qDTrUkIaaHhs_IQyPwga_adNN4hpsDtzreUCKtu4kbci68UHM" />
+                            <div class="flex flex-1 flex-col">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-1">
+                                        <h3 class="font-bold text-sf-gray">David Chen</h3>
+                                        <span class="material-symbols-outlined filled text-emerald-500 text-[18px]"
+                                            style="font-variation-settings: 'FILL' 1;">verified</span>
+                                    </div>
+                                    <div class="flex items-center gap-1 text-amber-400">
+                                        <span class="material-symbols-outlined filled text-[16px]"
+                                            style="font-variation-settings: 'FILL' 1;">star</span>
+                                        <span class="text-xs font-bold text-sf-gray">5.0</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-slate-500">Plumbing &amp; Repairs</p>
+                                <p class="mt-1 text-xs font-medium text-primary">₹500/hr</p>
+                            </div>
+                            <button onclick="event.stopPropagation(); addHelper(this, 'David Chen')"
+                                class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-sf-gray transition-colors group-hover:bg-primary/10 group-hover:text-primary border border-slate-200">
+                                <span class="material-symbols-outlined text-lg">add</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+        <!-- END_VIEW_DISCOVERY -->
+
+        <!-- START_VIEW_MATH_DETAIL -->
+        <div id="view-math-detail" class="view min-h-screen bg-slate-50/50">
+            <!-- Header -->
+            <div class="sticky top-0 z-40 w-full px-5 pt-12 pb-2 flex items-center justify-between">
+                <button onclick="navigate('discovery')"
+                    class="h-12 w-12 rounded-full bg-white shadow-sm flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+                </button>
+                <button class="h-12 w-12 rounded-full bg-white shadow-sm flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-2xl">more_horiz</span>
+                </button>
+            </div>
+
+            <main class="flex flex-col items-center px-5 pt-4 pb-24">
+                <!-- Hero Image -->
+                <div class="h-40 w-40 rounded-3xl overflow-hidden shadow-lg mb-6 bg-[#3C5B6F]">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxqqbi_r1gIFGLnXu4bEtna6l-uTHprcW6l9qp8zc26IUqK9q5Fui3OGtfqVcY76zQD_Q0Wlo409VL18rPHa0Gce5YMqrvbBptGf_v1l6z_lSA-IN18HJEUDAxKM9_SuFeMo2jFdypRU5hyMwNheqEEJ83pAjzqzwdlnsv9BaOvpZPbdy9Vg6J1HrA_ZHt4YxDXRppdpKNrL5MtQFsvCgtBhOFh1HhnD_tc29prgtKZ3jn_sz4btZQSRa1k_anlOPLDHAYtsTk3CY"
+                        class="w-full h-full object-cover opacity-0" alt="placeholder" />
+                    <div class="w-full h-full flex items-center justify-center -mt-40 text-white">
+                        <span class="material-symbols-outlined text-[80px]">calculate</span>
+                    </div>
+                </div>
+
+                <!-- Title & Info -->
+                <h1 class="text-[28px] font-bold text-slate-900 mb-2">Math Help</h1>
+                <div class="flex items-center gap-1.5 text-[15px] mb-8">
+                    <span class="text-primary font-semibold">24 Helpers Nearby</span>
+                    <span class="text-slate-400">•</span>
+                    <span class="text-slate-500">Starting at ₹200/hr</span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-4 w-full mb-10">
+                    <button onclick="openBookingModal('Math Tutoring', '₹200/hr')"
+                        class="flex-1 bg-primary text-white rounded-full py-4 px-4 flex items-center justify-center gap-2 font-semibold text-[17px] shadow-sm hover:bg-primary/90 transition">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        Book Now
+                    </button>
+                    <button onclick="openBookingModal('Math Tutoring — Urgent', '₹250/hr', true)"
+                        class="flex-1 bg-[#eaf4ff] text-primary rounded-full py-2 px-4 flex flex-col items-center justify-center font-semibold text-[15px] shadow-sm relative hover:bg-blue-100 transition leading-tight">
+                        <div class="flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[18px]">bolt</span>
+                            Urgent Help
+                        </div>
+                        <span>(+₹50)</span>
+                    </button>
+                </div>
+
+                <!-- Top Tutors Section -->
+                <div class="w-full text-left mb-4">
+                    <h2 class="text-xl font-bold text-slate-900">Top Tutors</h2>
+                </div>
+
+                <div class="w-full flex flex-col gap-4">
+                    <!-- Tutor 1 -->
+                    <div onclick="navigate('user-details')"
+                        class="flex items-center justify-between group cursor-pointer">
+                        <div class="flex items-center gap-4">
+                            <div class="relative">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQW0-Stt1fzRc5QBB3QVHPpBqF24tygY9PQ2fpjXtGEQy38BOiBsVLZhJjbVuhpMpCLMhTkEThnmBsh0YftfhkeUTzIbg-noq8DooBkHNFH4yM61HGvoHbDE3IqoHDaWM9njiUfvEq7RkjXYsMrrPMoq-Uoa3V3fs7_h6w01TcDxjMBrf0dlfgmT2iic0r6d3p3FvYl1p5G9r-OV-VeK60c9fOegqmLikndaGWnMLFtKAlt20QAqDZDW5dJmUgF7zNn8tg-vSNnxE"
+                                    class="w-14 h-14 rounded-full object-cover" alt="Sarah Jensen" />
+                                <div
+                                    class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-1">
+                                    <h3 class="font-bold text-[17px] text-slate-900">Sarah Jensen</h3>
+                                    <span class="material-symbols-outlined filled text-emerald-500 text-[16px]"
+                                        style="font-variation-settings: 'FILL' 1;">verified</span>
+                                </div>
+                                <div class="flex items-center text-[13px] text-slate-500 mt-0.5">
+                                    <span class="material-symbols-outlined filled text-amber-400 text-[14px] mr-1"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="font-medium mr-1.5 text-slate-600">4.9</span>
+                                    <span>• Calculus, Algebra</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="bg-slate-100 text-slate-900 font-bold text-sm px-3 py-1.5 rounded-full">₹450/hr</span>
+                            <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                        </div>
+                    </div>
+
+                    <!-- Tutor 2 -->
+                    <div onclick="navigate('user-details')"
+                        class="flex items-center justify-between group cursor-pointer">
+                        <div class="flex items-center gap-4">
+                            <div class="relative">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuChCSyq2kW94PHUH4oNt31ZNGJH3zMF5W1A7UuuOHCsdBEpnWfdCPGf7-aAHMk_UwIZzGOWYdvuo9XJcIrnu-9lwRMtfuXwJWiBjSLXlX4nMbYUG5sI9mqZaiKLUwHKNo_0Zna2foAhnp0fRJ_B00OrL7oBn_iaIx4ktNLoKaJMB0T3LaioUc6Ds_ELZCHOfj0ysADi1xKQ85iafwgH96HNky2KKVHwO8iSHYV9HGcl2CAVLbsf84HLplMcbXaEfnr66Mtgp5NxOVI"
+                                    class="w-14 h-14 rounded-full object-cover" alt="David Chen" />
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-1">
+                                    <h3 class="font-bold text-[17px] text-slate-900">David Chen</h3>
+                                    <span class="material-symbols-outlined filled text-emerald-500 text-[16px]"
+                                        style="font-variation-settings: 'FILL' 1;">verified</span>
+                                </div>
+                                <div class="flex items-center text-[13px] text-slate-500 mt-0.5">
+                                    <span class="material-symbols-outlined filled text-amber-400 text-[14px] mr-1"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="font-medium mr-1.5 text-slate-600">5.0</span>
+                                    <span>• Geometry, Trig</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="bg-slate-100 text-slate-900 font-bold text-sm px-3 py-1.5 rounded-full">₹300/hr</span>
+                            <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                        </div>
+                    </div>
+
+                    <!-- Tutor 3 -->
+                    <div onclick="navigate('user-details')"
+                        class="flex items-center justify-between group cursor-pointer">
+                        <div class="flex items-center gap-4">
+                            <div class="relative">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQW0-Stt1fzRc5QBB3QVHPpBqF24tygY9PQ2fpjXtGEQy38BOiBsVLZhJjbVuhpMpCLMhTkEThnmBsh0YftfhkeUTzIbg-noq8DooBkHNFH4yM61HGvoHbDE3IqoHDaWM9njiUfvEq7RkjXYsMrrPMoq-Uoa3V3fs7_h6w01TcDxjMBrf0dlfgmT2iic0r6d3p3FvYl1p5G9r-OV-VeK60c9fOegqmLikndaGWnMLFtKAlt20QAqDZDW5dJmUgF7zNn8tg-vSNnxE"
+                                    class="w-14 h-14 rounded-full object-cover" alt="Emily Wilson" />
+                                <div
+                                    class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-1">
+                                    <h3 class="font-bold text-[17px] text-slate-900">Emily Wilson</h3>
+                                    <span class="material-symbols-outlined filled text-emerald-500 text-[16px]"
+                                        style="font-variation-settings: 'FILL' 1;">verified</span>
+                                </div>
+                                <div class="flex items-center text-[13px] text-slate-500 mt-0.5">
+                                    <span class="material-symbols-outlined filled text-amber-400 text-[14px] mr-1"
+                                        style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="font-medium mr-1.5 text-slate-600">4.8</span>
+                                    <span>• Statistics</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="bg-slate-100 text-slate-900 font-bold text-sm px-3 py-1.5 rounded-full">₹200/hr</span>
+                            <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <!-- END_VIEW_MATH_DETAIL -->
+
+        <!-- START_VIEW_CATEGORY_GROCERIES -->
+        <div id="view-category-groceries" class="view min-h-screen bg-slate-50/50">
+            <div
+                class="sticky top-0 z-40 w-full px-5 pt-12 pb-2 flex items-center justify-between backdrop-blur-md bg-slate-50/90">
+                <button onclick="navigate('discovery')"
+                    class="h-12 w-12 rounded-full bg-white shadow-sm flex items-center justify-center text-orange-500">
+                    <span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+                </button>
+            </div>
+            <main class="flex flex-col items-center px-5 pt-4 pb-24">
+                <div
+                    class="h-40 w-40 rounded-3xl overflow-hidden shadow-lg mb-6 bg-orange-100 flex items-center justify-center text-orange-500">
+                    <span class="material-symbols-outlined text-[80px]">shopping_basket</span>
+                </div>
+                <h1 class="text-[28px] font-bold text-slate-900 mb-2">Groceries Delivery</h1>
+                <div class="flex items-center gap-1.5 text-[15px] mb-8">
+                    <span class="text-orange-500 font-semibold">12 Helpers Nearby</span>
+                    <span class="text-slate-400">•</span>
+                    <span class="text-slate-500">Starting at ₹100</span>
+                </div>
+                <div class="flex gap-4 w-full mb-10">
+                    <button onclick="openBookingModal('Grocery Delivery', '₹100')"
+                        class="flex-1 bg-orange-500 text-white rounded-full py-4 px-4 flex items-center justify-center gap-2 font-semibold text-[17px] shadow-sm hover:bg-orange-600 transition">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        Book Now
+                    </button>
+                    <button onclick="openBookingModal('Grocery Delivery — Urgent', '₹150', true)"
+                        class="flex-1 bg-orange-50 text-orange-600 rounded-full py-2 px-4 flex flex-col items-center justify-center font-semibold text-[15px] shadow-sm relative hover:bg-orange-100 transition leading-tight">
+                        <div class="flex items-center gap-1"><span
+                                class="material-symbols-outlined text-[18px]">bolt</span>Urgent Delivery</div>
+                        <span>(+₹50)</span>
+                    </button>
+                </div>
+                <div class="w-full text-left mb-4">
+                    <h2 class="text-xl font-bold text-slate-900">Top Helpers</h2>
+                </div>
+                <div class="w-full flex flex-col gap-4">
+                    <div onclick="navigate('user-details')"
+                        class="flex items-center justify-between group cursor-pointer bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQW0-Stt1fzRc5QBB3QVHPpBqF24tygY9PQ2fpjXtGEQy38BOiBsVLZhJjbVuhpMpCLMhTkEThnmBsh0YftfhkeUTzIbg-noq8DooBkHNFH4yM61HGvoHbDE3IqoHDaWM9njiUfvEq7RkjXYsMrrPMoq-Uoa3V3fs7_h6w01TcDxjMBrf0dlfgmT2iic0r6d3p3FvYl1p5G9r-OV-VeK60c9fOegqmLikndaGWnMLFtKAlt20QAqDZDW5dJmUgF7zNn8tg-vSNnxE"
+                                class="w-14 h-14 rounded-full object-cover" />
+                            <div>
+                                <div class="flex items-center gap-1">
+                                    <h3 class="font-bold text-[17px] text-slate-900">Priya M.</h3><span
+                                        class="material-symbols-outlined filled text-emerald-500 text-[16px]"
+                                        style="font-variation-settings: 'FILL' 1;">verified</span>
+                                </div>
+                                <div class="flex items-center text-[13px] text-slate-500 mt-0.5"><span
+                                        class="material-symbols-outlined filled text-amber-400 text-[14px] mr-1"
+                                        style="font-variation-settings: 'FILL' 1;">star</span><span
+                                        class="font-medium mr-1.5 text-slate-600">4.9</span><span>• 250+ trips</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="bg-slate-100 text-slate-900 font-bold text-sm px-3 py-1.5 rounded-full">₹150</span>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <!-- END_VIEW_CATEGORY_GROCERIES -->
+
+        <!-- START_VIEW_CATEGORY_TECH -->
+        <div id="view-category-tech" class="view min-h-screen bg-slate-50/50">
+            <div
+                class="sticky top-0 z-40 w-full px-5 pt-12 pb-2 flex items-center justify-between backdrop-blur-md bg-slate-50/90">
+                <button onclick="navigate('discovery')"
+                    class="h-12 w-12 rounded-full bg-white shadow-sm flex items-center justify-center text-purple-600">
+                    <span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+                </button>
+            </div>
+            <main class="flex flex-col items-center px-5 pt-4 pb-24">
+                <div
+                    class="h-40 w-40 rounded-3xl overflow-hidden shadow-lg mb-6 bg-purple-100 flex items-center justify-center text-purple-600">
+                    <span class="material-symbols-outlined text-[80px]">devices</span>
+                </div>
+                <h1 class="text-[28px] font-bold text-slate-900 mb-2">Tech Support</h1>
+                <div class="flex items-center gap-1.5 text-[15px] mb-8">
+                    <span class="text-purple-600 font-semibold">8 Experts Nearby</span>
+                    <span class="text-slate-400">•</span>
+                    <span class="text-slate-500">Starting at ₹300/hr</span>
+                </div>
+                <div class="flex gap-4 w-full mb-10">
+                    <button onclick="openBookingModal('Tech Support', '₹300/hr')"
+                        class="flex-1 bg-purple-600 text-white rounded-full py-4 px-4 flex items-center justify-center gap-2 font-semibold text-[17px] shadow-sm hover:bg-purple-700 transition">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        Book Now
+                    </button>
+                    <button onclick="openBookingModal('Tech Support — Immediate', '₹400/hr', true)"
+                        class="flex-1 bg-purple-50 text-purple-600 rounded-full py-2 px-4 flex flex-col items-center justify-center font-semibold text-[15px] shadow-sm relative hover:bg-purple-100 transition leading-tight">
+                        <div class="flex items-center gap-1"><span
+                                class="material-symbols-outlined text-[18px]">bolt</span>Immediate Fix</div>
+                        <span>(+₹100)</span>
+                    </button>
+                </div>
+                <div class="w-full text-left mb-4">
+                    <h2 class="text-xl font-bold text-slate-900">Top Technicians</h2>
+                </div>
+                <div class="w-full flex flex-col gap-4">
+                    <div onclick="navigate('user-details')"
+                        class="flex items-center justify-between group cursor-pointer bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuChCSyq2kW94PHUH4oNt31ZNGJH3zMF5W1A7UuuOHCsdBEpnWfdCPGf7-aAHMk_UwIZzGOWYdvuo9XJcIrnu-9lwRMtfuXwJWiBjSLXlX4nMbYUG5sI9mqZaiKLUwHKNo_0Zna2foAhnp0fRJ_B00OrL7oBn_iaIx4ktNLoKaJMB0T3LaioUc6Ds_ELZCHOfj0ysADi1xKQ85iafwgH96HNky2KKVHwO8iSHYV9HGcl2CAVLbsf84HLplMcbXaEfnr66Mtgp5NxOVI"
+                                class="w-14 h-14 rounded-full object-cover" />
+                            <div>
+                                <div class="flex items-center gap-1">
+                                    <h3 class="font-bold text-[17px] text-slate-900">Aarav S.</h3><span
+                                        class="material-symbols-outlined filled text-emerald-500 text-[16px]"
+                                        style="font-variation-settings: 'FILL' 1;">verified</span>
+                                </div>
+                                <div class="flex items-center text-[13px] text-slate-500 mt-0.5"><span
+                                        class="material-symbols-outlined filled text-amber-400 text-[14px] mr-1"
+                                        style="font-variation-settings: 'FILL' 1;">star</span><span
+                                        class="font-medium mr-1.5 text-slate-600">5.0</span><span>• WiFi &
+                                        Laptops</span></div>
+                            </div>
+                        </div>
+                        <span
+                            class="bg-slate-100 text-slate-900 font-bold text-sm px-3 py-1.5 rounded-full">₹450/hr</span>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <!-- END_VIEW_CATEGORY_TECH -->
+
+        <!-- START_VIEW_CATEGORY_PETS -->
+        <div id="view-category-pets" class="view min-h-screen bg-slate-50/50">
+            <div
+                class="sticky top-0 z-40 w-full px-5 pt-12 pb-2 flex items-center justify-between backdrop-blur-md bg-slate-50/90">
+                <button onclick="navigate('discovery')"
+                    class="h-12 w-12 rounded-full bg-white shadow-sm flex items-center justify-center text-emerald-600">
+                    <span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+                </button>
+            </div>
+            <main class="flex flex-col items-center px-5 pt-4 pb-24">
+                <div
+                    class="h-40 w-40 rounded-3xl overflow-hidden shadow-lg mb-6 bg-emerald-100 flex items-center justify-center text-emerald-600">
+                    <span class="material-symbols-outlined text-[80px]">pets</span>
+                </div>
+                <h1 class="text-[28px] font-bold text-slate-900 mb-2">Dog Walking & Sitting</h1>
+                <div class="flex items-center gap-1.5 text-[15px] mb-8">
+                    <span class="text-emerald-600 font-semibold">18 Sitters Nearby</span>
+                    <span class="text-slate-400">•</span>
+                    <span class="text-slate-500">Starting at ₹150/walk</span>
+                </div>
+                <div class="flex gap-4 w-full mb-10">
+                    <button onclick="openBookingModal('Dog Walking', '₹150/walk')"
+                        class="flex-1 bg-emerald-500 text-white rounded-full py-4 px-4 flex items-center justify-center gap-2 font-semibold text-[17px] shadow-sm hover:bg-emerald-600 transition">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        Book Now
+                    </button>
+                    <button onclick="openBookingModal('Dog Walking — Urgent', '₹200/walk', true)"
+                        class="flex-1 bg-emerald-50 text-emerald-600 rounded-full py-2 px-4 flex flex-col items-center justify-center font-semibold text-[15px] shadow-sm relative hover:bg-emerald-100 transition leading-tight">
+                        <div class="flex items-center gap-1"><span
+                                class="material-symbols-outlined text-[18px]">bolt</span>Walk Now</div>
+                        <span>(+₹50)</span>
+                    </button>
+                </div>
+                <div class="w-full text-left mb-4">
+                    <h2 class="text-xl font-bold text-slate-900">Top Dog Walkers</h2>
+                </div>
+                <div class="w-full flex flex-col gap-4">
+                    <div onclick="navigate('user-details')"
+                        class="flex items-center justify-between group cursor-pointer bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQW0-Stt1fzRc5QBB3QVHPpBqF24tygY9PQ2fpjXtGEQy38BOiBsVLZhJjbVuhpMpCLMhTkEThnmBsh0YftfhkeUTzIbg-noq8DooBkHNFH4yM61HGvoHbDE3IqoHDaWM9njiUfvEq7RkjXYsMrrPMoq-Uoa3V3fs7_h6w01TcDxjMBrf0dlfgmT2iic0r6d3p3FvYl1p5G9r-OV-VeK60c9fOegqmLikndaGWnMLFtKAlt20QAqDZDW5dJmUgF7zNn8tg-vSNnxE"
+                                class="w-14 h-14 rounded-full object-cover" />
+                            <div>
+                                <div class="flex items-center gap-1">
+                                    <h3 class="font-bold text-[17px] text-slate-900">Emily W.</h3><span
+                                        class="material-symbols-outlined filled text-emerald-500 text-[16px]"
+                                        style="font-variation-settings: 'FILL' 1;">verified</span>
+                                </div>
+                                <div class="flex items-center text-[13px] text-slate-500 mt-0.5"><span
+                                        class="material-symbols-outlined filled text-amber-400 text-[14px] mr-1"
+                                        style="font-variation-settings: 'FILL' 1;">star</span><span
+                                        class="font-medium mr-1.5 text-slate-600">4.8</span><span>• Big Dogs</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span
+                            class="bg-slate-100 text-slate-900 font-bold text-sm px-3 py-1.5 rounded-full">₹200/wk</span>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <!-- END_VIEW_CATEGORY_PETS -->
+
+        <!-- START_VIEW_WALLET -->
+        <div id="view-wallet" class="view min-h-screen pb-24">
+            <!-- Header -->
+            <div class="sticky top-0 z-40 w-full px-5 pt-12 pb-4 flex items-center justify-between">
+                <button onclick="navigate('discovery')"
+                    class="h-12 w-12 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-900 border border-slate-100">
+                    <span class="material-symbols-outlined text-xl">arrow_back_ios_new</span>
+                </button>
+                <h1 class="text-xl font-bold text-slate-900">Wallet</h1>
+                <button
+                    class="h-12 w-12 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-900 border border-slate-100">
+                    <span class="material-symbols-outlined text-2xl">more_horiz</span>
+                </button>
+            </div>
+
+            <main class="flex flex-col items-center px-5 pt-2">
+                <!-- Balance Card -->
+                <div
+                    class="w-full rounded-[28px] overflow-hidden bg-gradient-to-br from-[#1b3c58] via-[#21567d] to-[#1cb0c8] p-6 text-white shadow-lg mb-6 relative">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <p class="text-white/80 text-[15px] font-medium mb-1">Total Balance</p>
+                            <h2 class="text-[42px] font-bold leading-none tracking-tight">₹2,450</h2>
+                        </div>
+                        <div
+                            class="h-12 w-12 rounded-full border-[1.5px] border-white/20 flex items-center justify-center bg-white/10 backdrop-blur-md">
+                            <span class="material-symbols-outlined text-white">account_balance_wallet</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-1.5 mb-8">
+                        <div class="h-1.5 w-1.5 rounded-full bg-emerald-400"></div>
+                        <span
+                            class="text-emerald-400 text-[13px] font-medium border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-0.5 rounded-full tracking-wide">Available</span>
+                    </div>
+
+                    <!-- Escrow Panel -->
+                    <div
+                        class="w-full bg-[#252525]/80 rounded-2xl p-4 flex items-center gap-4 backdrop-blur-sm border border-white/5">
+                        <div class="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-white text-[20px]">lock</span>
+                        </div>
+                        <div>
+                            <p class="text-white/60 text-[11px] font-semibold tracking-wider uppercase mb-0.5">LOCKED IN
+                                ESCROW</p>
+                            <p class="text-xl font-bold text-white leading-tight">₹400</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-4 w-full mb-8">
+                    <button onclick="openModal('modal-withdraw')"
+                        class="flex-1 bg-white text-slate-900 font-bold rounded-2xl py-4 flex items-center justify-center gap-2 shadow-sm border border-slate-100 hover:bg-slate-50 transition">
+                        <span class="material-symbols-outlined text-primary text-[20px]">arrow_downward</span>
+                        Withdraw
+                    </button>
+                    <button onclick="openModal('modal-add-money')"
+                        class="flex-1 bg-white text-slate-900 font-bold rounded-2xl py-4 flex items-center justify-center gap-2 shadow-sm border border-slate-100 hover:bg-slate-50 transition">
+                        <span class="material-symbols-outlined text-primary text-[20px]">add</span>
+                        Add Money
+                    </button>
+                </div>
+
+                <!-- Recent Activity Wrapper -->
+                <div
+                    class="w-full bg-white rounded-t-[32px] p-6 -mx-5 px-5 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.05)] border-t border-slate-100 relative min-h-[400px]">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-[22px] font-bold text-slate-900 tracking-tight">Recent Activity</h2>
+                        <a href="#" class="text-[15px] text-primary hover:text-primary/80 transition font-medium">See
+                            All</a>
+                    </div>
+
+                    <div class="flex flex-col gap-5">
+                        <!-- Activity 1 -->
+                        <div
+                            class="flex items-center justify-between group cursor-pointer pb-5 border-b border-slate-100 last:border-0">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-[52px] h-[52px] rounded-full bg-[#f0f6ff] flex items-center justify-center text-primary shrink-0 transition-transform group-hover:scale-105">
+                                    <span class="material-symbols-outlined text-[26px]">school</span>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <h3 class="font-bold text-[17px] text-slate-900 mb-0.5 tracking-tight">Math Tutoring
+                                    </h3>
+                                    <p class="text-[14px] text-slate-500 font-medium">Sharma Ji</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end">
+                                <span class="font-bold text-[17px] text-emerald-500 mb-1">+ ₹ 170</span>
+                                <span
+                                    class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest bg-slate-100 px-2 py-0.5 rounded-full">Settled</span>
+                            </div>
+                        </div>
+
+                        <!-- Activity 2 -->
+                        <div
+                            class="flex items-center justify-between group cursor-pointer pb-5 border-b border-slate-100 last:border-0">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-[52px] h-[52px] rounded-full bg-[#f4f4f5] flex items-center justify-center text-slate-500 shrink-0 transition-transform group-hover:scale-105">
+                                    <span class="material-symbols-outlined text-[26px]">build</span>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <h3 class="font-bold text-[17px] text-slate-900 mb-0.5 tracking-tight">Window Setup
+                                    </h3>
+                                    <p class="text-[14px] text-slate-500 font-medium">Gupta House</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end">
+                                <div class="flex items-center gap-1 mb-1">
+                                    <span class="material-symbols-outlined text-slate-400 text-[14px]">lock</span>
+                                    <span class="font-bold text-[17px] text-slate-600">₹ 200</span>
+                                </div>
+                                <span
+                                    class="text-[11px] font-semibold text-amber-600 uppercase tracking-widest bg-amber-50 px-2 py-0.5 rounded-full">In
+                                    Progress</span>
+                            </div>
+                        </div>
+
+                        <!-- Activity 3 -->
+                        <div
+                            class="flex items-center justify-between group cursor-pointer pb-5 border-b border-slate-100 last:border-0">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-[52px] h-[52px] rounded-full bg-[#fff1f2] flex items-center justify-center text-red-500 shrink-0 transition-transform group-hover:scale-105">
+                                    <span class="material-symbols-outlined text-[26px]">receipt</span>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <h3 class="font-bold text-[17px] text-slate-900 mb-0.5 tracking-tight">Platform Fee
+                                    </h3>
+                                    <p class="text-[14px] text-slate-500 font-medium line-clamp-1 w-[130px]">Transaction
+                                        ID: #9923</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end">
+                                <span class="font-bold text-[17px] text-slate-900 mb-1">- ₹ 30</span>
+                                <span
+                                    class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest bg-slate-100 px-2 py-0.5 rounded-full">Debit</span>
+                            </div>
+                        </div>
+
+                        <!-- Activity 4 -->
+                        <div
+                            class="flex items-center justify-between group cursor-pointer pb-5 border-b border-slate-100 last:border-0">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-[52px] h-[52px] rounded-full bg-[#f0f6ff] flex items-center justify-center text-primary shrink-0 transition-transform group-hover:scale-105">
+                                    <span class="material-symbols-outlined text-[26px]">local_shipping</span>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <h3 class="font-bold text-[17px] text-slate-900 mb-0.5 tracking-tight">Moving Help
+                                    </h3>
+                                    <p class="text-[14px] text-slate-500 font-medium">Ravi Kumar</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end">
+                                <span class="font-bold text-[17px] text-emerald-500 mb-1">+ ₹ 450</span>
+                                <span
+                                    class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest bg-slate-100 px-2 py-0.5 rounded-full">Settled</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+        </div>
+        <!-- END_VIEW_WALLET -->
+
+        <!-- START_VIEW_CLIENT_BOOKINGS -->
+        <div id="view-client-bookings" class="view min-h-screen pb-24">
+            <!-- Header Area -->
+            <div class="sticky top-0 z-40 bg-background-light/90 backdrop-blur-md border-b border-slate-200">
+                <div class="flex items-center justify-between p-4">
+                    <button
+                        class="text-slate-900 flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-100 transition-colors">
+                        <span class="material-symbols-outlined text-2xl">arrow_back</span>
+                    </button>
+                    <h2 class="text-slate-900 text-lg font-bold leading-tight tracking-tight flex-1 text-center">Your
+                        Bookings</h2>
+                    <button onclick="toggleProviderMode(true)"
+                        class="flex items-center justify-end text-primary text-sm font-bold leading-normal tracking-wide shrink-0 hover:text-primary/80 transition-colors">
+                        Switch to Earning
+                    </button>
+                </div>
+                <!-- Segmented Control -->
+                <div class="px-4 pb-4">
+                    <div class="flex h-12 w-full items-center justify-center rounded-xl bg-slate-200/50 p-1">
+                        <label
+                            class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg transition-all duration-200 has-[:checked]:bg-white has-[:checked]:shadow-sm has-[:checked]:text-primary text-slate-500 text-sm font-semibold">
+                            <span class="truncate">Upcoming</span>
+                            <input checked="" class="invisible w-0 absolute" name="client-booking-type" type="radio"
+                                value="Upcoming" />
+                        </label>
+                        <label
+                            class="flex cursor-pointer h-full grow items-center justify-center overflow-hidden rounded-lg transition-all duration-200 has-[:checked]:bg-white has-[:checked]:shadow-sm has-[:checked]:text-primary text-slate-500 text-sm font-semibold">
+                            <span class="truncate">Past</span>
+                            <input class="invisible w-0 absolute" name="client-booking-type" type="radio"
+                                value="Past" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="px-4 pt-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-slate-900 text-lg font-bold leading-tight">Upcoming Appointments</h3>
+                    <button class="text-primary text-xs font-semibold hover:underline">See All</button>
+                </div>
+
+                <!-- Upcoming Card 1 -->
+                <div
+                    class="group relative flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm border border-slate-100 mb-4 transition-all hover:shadow-md">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="relative h-14 w-14 shrink-0 rounded-full bg-slate-200 overflow-hidden">
+                                <img alt="Portrait of a young man smiling" class="h-full w-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuChCSyq2kW94PHUH4oNt31ZNGJH3zMF5W1A7UuuOHCsdBEpnWfdCPGf7-aAHMk_UwIZzGOWYdvuo9XJcIrnu-9lwRMtfuXwJWiBjSLXlX4nMbYUG5sI9mqZaiKLUwHKNo_0Zna2foAhnp0fRJ_B00OrL7oBn_iaIx4ktNLoKaJMB0T3LaioUc6Ds_ELZCHOfj0ysADi1xKQ85iafwgH96HNky2KKVHwO8iSHYV9HGcl2CAVLbsf84HLplMcbXaEfnr66Mtgp5NxOVI" />
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-1">
+                                    <p class="text-slate-900 text-base font-bold leading-tight">Aarav S.</p>
+                                    <span class="material-symbols-outlined text-primary text-[18px]"
+                                        style="font-variation-settings: 'FILL' 1;">verified</span>
+                                </div>
+                                <p class="text-slate-500 text-sm font-medium">Home Cleaning</p>
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-green-100 px-2 py-1">
+                            <p class="text-green-700 text-xs font-bold uppercase tracking-wider">Confirmed</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-slate-600 bg-slate-50 p-3 rounded-xl">
+                        <span class="material-symbols-outlined text-primary">schedule</span>
+                        <span class="text-sm font-medium">Today, 2:00 PM - 4:00 PM</span>
+                    </div>
+                    <div class="border-t border-slate-100 pt-3 flex gap-3">
+                        <button onclick="openModal('modal-tracker')"
+                            class="flex-1 h-10 items-center justify-center rounded-xl bg-primary text-white text-sm font-semibold shadow-sm hover:bg-primary/90 transition-colors flex gap-2">
+                            <span class="material-symbols-outlined text-[18px]">location_on</span>
+                            Track Helper
+                        </button>
+                        <button onclick="openModal('modal-chat')"
+                            class="h-10 w-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50">
+                            <span class="material-symbols-outlined text-[20px]">chat</span>
+                        </button>
+                        <button onclick="openModal('modal-call')"
+                            class="h-10 w-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50">
+                            <span class="material-symbols-outlined text-[20px]">call</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Upcoming Card 2 -->
+                <div
+                    class="group relative flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm border border-slate-100 mb-8 transition-all hover:shadow-md opacity-90">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="relative h-14 w-14 shrink-0 rounded-full bg-slate-200 overflow-hidden">
+                                <img alt="Portrait of a young woman smiling" class="h-full w-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQW0-Stt1fzRc5QBB3QVHPpBqF24tygY9PQ2fpjXtGEQy38BOiBsVLZhJjbVuhpMpCLMhTkEThnmBsh0YftfhkeUTzIbg-noq8DooBkHNFH4yM61HGvoHbDE3IqoHDaWM9njiUfvEq7RkjXYsMrrPMoq-Uoa3V3fs7_h6w01TcDxjMBrf0dlfgmT2iic0r6d3p3FvYl1p5G9r-OV-VeK60c9fOegqmLikndaGWnMLFtKAlt20QAqDZDW5dJmUgF7zNn8tg-vSNnxE" />
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-1">
+                                    <p class="text-slate-900 text-base font-bold leading-tight">Priya M.</p>
+                                    <span class="material-symbols-outlined text-primary text-[18px]"
+                                        style="font-variation-settings: 'FILL' 1;">verified</span>
+                                </div>
+                                <p class="text-slate-500 text-sm font-medium">Plumbing Repair</p>
+                            </div>
+                        </div>
+                        <div class="rounded-lg bg-orange-100 px-2 py-1">
+                            <p class="text-orange-700 text-xs font-bold uppercase tracking-wider">Pending</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-slate-600 bg-slate-50 p-3 rounded-xl">
+                        <span class="material-symbols-outlined text-primary">calendar_month</span>
+                        <span class="text-sm font-medium">Tomorrow, 10:00 AM</span>
+                    </div>
+                    <div class="border-t border-slate-100 pt-3 flex gap-3">
+                        <button onclick="openModal('modal-booking-detail')"
+                            class="flex-1 h-10 items-center justify-center rounded-xl bg-slate-100 text-slate-900 text-sm font-semibold hover:bg-slate-200 transition-colors">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-slate-900 text-lg font-bold leading-tight">Past Services</h3>
+                </div>
+
+                <!-- Past Card 1 -->
+                <div
+                    class="group relative flex flex-col gap-3 rounded-2xl bg-white/5 p-4 shadow-sm border border-white/8 mb-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="h-10 w-10 shrink-0 rounded-full bg-white/10 flex items-center justify-center text-white/60">
+                                <span class="material-symbols-outlined text-xl">electric_bolt</span>
+                            </div>
+                            <div>
+                                <p class="text-slate-900 text-sm font-bold">Electrical Fix</p>
+                                <p class="text-slate-500 text-xs">Aug 12 • Completed</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-900 font-bold text-sm">₹450</p>
+                    </div>
+                    <div class="border-t border-slate-100/50 pt-2 mt-1">
+                        <button onclick="openModal('modal-review')"
+                            class="w-full text-center text-primary text-sm font-semibold py-1 hover:bg-primary/5 rounded-lg transition-colors">
+                            Rate &amp; Review
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Past Card 2 -->
+                <div
+                    class="group relative flex flex-col gap-3 rounded-2xl bg-white/5 p-4 shadow-sm border border-white/8 mb-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="h-10 w-10 shrink-0 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                                <span class="material-symbols-outlined text-xl">yard</span>
+                            </div>
+                            <div>
+                                <p class="text-slate-900 text-sm font-bold">Gardening</p>
+                                <p class="text-slate-500 text-xs">Aug 05 • Completed</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-900 font-bold text-sm">₹800</p>
+                    </div>
+                    <div class="border-t border-slate-100/50 pt-2 mt-1">
+                        <div class="flex items-center justify-center gap-1 text-yellow-400 text-sm font-medium">
+                            <span class="material-symbols-outlined text-[18px]"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px]"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="text-slate-500 ml-1 text-xs">(5.0)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END_VIEW_CLIENT_BOOKINGS -->
+
+        <!-- START_VIEW_PROVIDER_BOOKINGS -->
+        <div id="view-provider-bookings" class="view min-h-screen pb-24">
+            <!-- Header Section with Frosted Glass Effect -->
+            <div
+                class="sticky top-0 z-40 backdrop-blur-xl bg-background-light/80 border-b border-slate-200/50 pt-safe-top">
+                <div class="px-4 pt-12 pb-3 flex justify-between items-center">
+                    <h1 class="text-2xl font-bold tracking-tight text-slate-900">Your Jobs</h1>
+                    <button onclick="toggleProviderMode(false)"
+                        class="group flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-200/50 hover:bg-slate-200 transition-all">
+                        <span class="text-xs font-semibold text-primary">Switch to Hiring</span>
+                        <span class="material-symbols-outlined text-primary text-[18px]">sync_alt</span>
+                    </button>
+                </div>
+                <!-- Segmented Control -->
+                <div class="px-4 pb-3 pt-1">
+                    <div class="flex h-9 p-1 bg-slate-200/60 rounded-lg relative">
+                        <div
+                            class="absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-white rounded shadow-sm transition-transform duration-300 ease-out translate-x-0">
+                        </div>
+                        <button
+                            class="flex-1 relative z-10 flex items-center justify-center text-xs font-medium text-slate-900">Upcoming</button>
+                        <button
+                            class="flex-1 relative z-10 flex items-center justify-center text-xs font-medium text-slate-500">Completed</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scrollable Content -->
+            <div class="px-4 pt-6 pb-2">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-bold text-slate-900">Upcoming Jobs</h2>
+                    <span class="text-xs font-medium text-primary">View Calendar</span>
+                </div>
+
+                <!-- Card 1 -->
+                <div class="mb-5 relative overflow-hidden rounded-2xl bg-white shadow-card border border-slate-100">
+                    <div class="absolute top-0 right-0 p-4">
+                        <span
+                            class="inline-flex items-center justify-center px-2.5 py-1 rounded-full bg-green-100 text-green-700 text-[10px] font-bold uppercase tracking-wider">
+                            Confirmed
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-primary flex items-center justify-center text-white shadow-lg shadow-blue-500/30 shrink-0">
+                                <span class="material-symbols-outlined text-2xl">calculate</span>
+                            </div>
+                            <div class="pt-0.5">
+                                <h3 class="text-lg font-bold text-slate-900 leading-tight">Math Tutoring</h3>
+                                <p class="text-sm text-slate-500 mt-1">Sharma House</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex items-center gap-6">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-slate-400 text-xl">schedule</span>
+                                <div>
+                                    <p class="text-xs text-slate-500 font-medium">Time</p>
+                                    <p class="text-sm font-semibold text-slate-900">10:00 - 12:00</p>
+                                </div>
+                            </div>
+                            <div class="h-8 w-px bg-slate-100"></div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-slate-400 text-xl">payments</span>
+                                <div>
+                                    <p class="text-xs text-slate-500 font-medium">Earnings</p>
+                                    <p class="text-sm font-semibold text-slate-900">₹500</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Map Snapshot Area -->
+                    <div class="bg-slate-50 p-3 flex items-center justify-between border-t border-slate-100">
+                        <div class="flex items-center gap-3">
+                            <div class="relative w-12 h-12 rounded-lg overflow-hidden bg-slate-200 shadow-inner">
+                                <div class="w-full h-full bg-cover bg-center opacity-80"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBkLdBfotjNrT6JYTCDhEVZnaYXVFMGXsGANsA1L8GYRs5cfT42-lUUe3JLAx_gPIwcputrlNxeX7m1Gqm4jgSnuZmB-x18TT8tbrqmZ8Ls6P63o-9f941YprpDrSiJ9bnF5g9FgFIsS24Eo-bVMa-k2N3xfLOwIA38xHp9fp31RyegJkv-gH01yKGJVl2wnmCn9nyk0pluuCT3h6Gxx858hoUO8oyaYsSjfm1lfr-ECUZPZ_o-zMk-HzT9JU6mcuNXfmgnRiJ_7kk');">
+                                </div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-2 h-2 bg-primary rounded-full shadow-md ring-2 ring-white"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-slate-900">2.4 km away</p>
+                                <p class="text-[10px] text-slate-500">Sector 4, Rohini</p>
+                            </div>
+                        </div>
+                        <button
+                            class="w-8 h-8 flex items-center justify-center rounded-full bg-white border border-slate-200 text-primary shadow-sm">
+                            <span class="material-symbols-outlined text-lg">near_me</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="mb-5 relative overflow-hidden rounded-2xl bg-white shadow-card border border-slate-100 opacity-90">
+                    <div class="absolute top-0 right-0 p-4">
+                        <span
+                            class="inline-flex items-center justify-center px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 text-[10px] font-bold uppercase tracking-wider">
+                            Tomorrow
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-orange-500/30 shrink-0">
+                                <span class="material-symbols-outlined text-2xl">cleaning_services</span>
+                            </div>
+                            <div class="pt-0.5">
+                                <h3 class="text-lg font-bold text-slate-900 leading-tight">Deep Cleaning</h3>
+                                <p class="text-sm text-slate-500 mt-1">Gupta Residence</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex items-center gap-6">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-slate-400 text-xl">schedule</span>
+                                <div>
+                                    <p class="text-xs text-slate-500 font-medium">Time</p>
+                                    <p class="text-sm font-semibold text-slate-900">14:00 - 16:00</p>
+                                </div>
+                            </div>
+                            <div class="h-8 w-px bg-slate-100"></div>
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-slate-400 text-xl">payments</span>
+                                <div>
+                                    <p class="text-xs text-slate-500 font-medium">Earnings</p>
+                                    <p class="text-sm font-semibold text-slate-900">₹850</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completed Section (Preview) -->
+            <div class="px-4 pb-8">
+                <h2 class="text-lg font-bold text-slate-900 mb-4">Past Jobs</h2>
+                <div
+                    class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 divide-y divide-slate-100">
+
+                    <!-- Past Job Item 1 -->
+                    <div
+                        class="p-4 flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                                <span class="material-symbols-outlined text-lg">local_shipping</span>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate-900">House Moving Help</h4>
+                                <p class="text-xs text-slate-500">Yesterday • ₹1,200</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                            <div class="flex items-center text-yellow-400 text-xs">
+                                <span class="material-symbols-outlined text-[14px]"
+                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[14px]"
+                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[14px]"
+                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[14px]"
+                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[14px]"
+                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                            </div>
+                            <span
+                                class="text-[10px] font-medium text-green-600 bg-green-50 px-1.5 py-0.5 rounded">Settled</span>
+                        </div>
+                    </div>
+
+                    <!-- Past Job Item 2 -->
+                    <div
+                        class="p-4 flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                                <span class="material-symbols-outlined text-lg">plumbing</span>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate-900">Kitchen Sink Repair</h4>
+                                <p class="text-xs text-slate-500">Mon, 12 Oct • ₹450</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                            <div class="flex items-center text-yellow-400 text-xs">
+                                <span class="material-symbols-outlined text-[14px]"
+                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[14px]"
+                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[14px]"
+                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[14px]"
+                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[14px] text-slate-300">star</span>
+                            </div>
+                            <span
+                                class="text-[10px] font-medium text-green-600 bg-green-50 px-1.5 py-0.5 rounded">Settled</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END_VIEW_PROVIDER_BOOKINGS -->
+
+        <!-- START_VIEW_SEARCH_OTHER -->
+        <div id="view-search-other" class="view min-h-screen bg-slate-50/50 pb-24">
+            <div class="sticky top-0 z-40 w-full px-5 pt-12 pb-4 flex items-center gap-3 backdrop-blur-md bg-white">
+                <button onclick="navigate('discovery')"
+                    class="h-10 w-10 shrink-0 rounded-full bg-slate-100 flex items-center justify-center text-slate-900 border border-slate-200">
+                    <span class="material-symbols-outlined text-xl">arrow_back_ios_new</span>
+                </button>
+                <div class="flex-1 relative">
+                    <span class="material-symbols-outlined absolute left-3 top-3 text-slate-400">search</span>
+                    <input type="text" placeholder="Search for jobs or services..."
+                        class="w-full h-12 bg-slate-100 border-transparent rounded-full pl-10 pr-4 text-[15px] focus:border-primary focus:ring-primary focus:ring-1 transition-all outline-none" />
+                </div>
+            </div>
+            <main class="px-5 pt-2">
+                <h1 class="text-[24px] font-bold text-slate-900 mb-1">What do you need help with?</h1>
+                <p class="text-[14px] text-slate-500 mb-6">Search above or tap on any category below.</p>
+
+                <h2 class="text-[14px] font-bold uppercase tracking-wider text-slate-400 mb-3 ml-1">Top 50 Services</h2>
+                <div class="flex flex-wrap gap-2">
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Plumber</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Electrician</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Tutor</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">House
+                        Cleaner</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Babysitter</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Mover</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Gardener</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Painter</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Carpenter</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Handyman</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Personal
+                        Chef</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Driver</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Mechanic</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Photographer</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Videographer</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">DJ</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Waiter/Server</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Bartender</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Security
+                        Guard</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Makeup
+                        Artist</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Hair
+                        Stylist</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Massage
+                        Therapist</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Personal
+                        Trainer</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Yoga
+                        Instructor</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Pet
+                        Groomer</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Dog
+                        Walker</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Pet
+                        Sitter</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Tailor</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Laundry
+                        Service</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Grocery
+                        Delivery</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Tech
+                        Support</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Web
+                        Developer</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Graphic
+                        Designer</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Translator</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Data
+                        Entry</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Accountant</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Lawyer</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Tax
+                        Prep</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Math
+                        Tutor</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Science
+                        Tutor</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Language
+                        Tutor</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Music
+                        Teacher</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Dance
+                        Instructor</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Event
+                        Planner</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Florist</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Caterer</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Appliance
+                        Repair</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">HVAC
+                        Repair</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Pest
+                        Control</button>
+                    <button
+                        class="px-4 py-2 bg-white border border-slate-200 rounded-full text-[14px] font-medium text-slate-700 hover:border-primary hover:text-primary transition-colors focus:bg-primary focus:text-white">Pool
+                        Cleaner</button>
+                </div>
+            </main>
+        </div>
+        <!-- END_VIEW_SEARCH_OTHER -->
+
+        <!-- START_VIEW_PROFILE -->
+        <div id="view-profile" class="view min-h-screen bg-slate-50/50 pb-24">
+            <div class="px-5 pt-12 pb-6 border-b border-slate-200 bg-white">
+                <div class="flex items-center gap-4">
+                    <div class="relative h-20 w-20 overflow-hidden rounded-full border border-slate-200 shadow-sm">
+                        <img alt="User Profile" class="h-full w-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhIaDyK5O9K4pdPhW7rBuXAyfNEtnP8A1lvzCXIB0L6fMTAbSkJm8jLWNrfuboNcFgUzRrxTwZBlkXH6mqeEEVl7Bi2bImpwhMcv8yIljfANu8DrLpPZqjb32Mdn9h6ny5_XVZ_8sPykH2fPpxkwG2F39de5TUuXOfeKyLBon-JzI-aBW3kcNfDV7KPn7dbPTaXi7w4APQ2nf7Q87iWfTvcM2MA7lFnSH3sZwj6M1Ky4owpx2HcJg0iMWPuiDZFB9TomwHjaoY1Ao" />
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-slate-900">Your Saha Profile</h1>
+                        <p class="text-slate-500 font-medium">jaideep@example.com</p>
+                    </div>
+                </div>
+            </div>
+            <main class="px-4 pt-6 flex flex-col gap-3">
+                <div
+                    class="bg-white rounded-2xl border border-slate-100 overflow-hidden divide-y divide-slate-100 shadow-sm">
+                    <div onclick="openModal('modal-personal-info')"
+                        class="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-50 transition">
+                        <div class="flex items-center gap-3 text-slate-700">
+                            <span class="material-symbols-outlined text-slate-400">person</span>
+                            <span class="font-medium">Personal Information</span>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                    </div>
+                    <div onclick="navigate('wallet')"
+                        class="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-50 transition">
+                        <div class="flex items-center gap-3 text-slate-700">
+                            <span class="material-symbols-outlined text-slate-400">payment</span>
+                            <span class="font-medium">Payments & Wallet</span>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                    </div>
+                    <div onclick="openModal('modal-addresses')"
+                        class="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-50 transition">
+                        <div class="flex items-center gap-3 text-slate-700">
+                            <span class="material-symbols-outlined text-slate-400">location_on</span>
+                            <span class="font-medium">Saved Addresses</span>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white rounded-2xl border border-slate-100 overflow-hidden divide-y divide-slate-100 shadow-sm mt-2">
+                    <div onclick="openModal('modal-help-support')"
+                        class="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-50 transition">
+                        <div class="flex items-center gap-3 text-slate-700">
+                            <span class="material-symbols-outlined text-slate-400">support_agent</span>
+                            <span class="font-medium">Help & Support</span>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                    </div>
+                    <div onclick="openModal('modal-signout')"
+                        class="flex items-center justify-between p-4 cursor-pointer hover:bg-slate-50 transition">
+                        <div class="flex items-center gap-3 text-red-600">
+                            <span class="material-symbols-outlined text-red-400">logout</span>
+                            <span class="font-medium">Sign Out</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <!-- END_VIEW_PROFILE -->
+
+        <!-- START_VIEW_USER_DETAILS -->
+        <div id="view-user-details" class="view min-h-screen bg-slate-50/50 pb-24">
+            <div
+                class="sticky top-0 z-40 w-full px-5 pt-12 pb-4 flex items-center justify-between backdrop-blur-md bg-white border-b border-slate-200/50">
+                <button onclick="goBack()"
+                    class="h-10 w-10 shrink-0 rounded-full bg-slate-100 flex items-center justify-center text-slate-900 border border-slate-200">
+                    <span class="material-symbols-outlined text-xl">arrow_back</span>
+                </button>
+                <div class="flex gap-2">
+                    <button onclick="shareProfile()"
+                        class="h-10 w-10 shrink-0 rounded-full bg-slate-100 flex items-center justify-center text-slate-900 border border-slate-200">
+                        <span class="material-symbols-outlined text-xl">share</span>
+                    </button>
+                    <button onclick="toggleFavorite(this)"
+                        class="h-10 w-10 shrink-0 rounded-full bg-slate-100 flex items-center justify-center text-red-500 border border-slate-200">
+                        <span class="material-symbols-outlined filled text-xl"
+                            style="font-variation-settings: 'FILL' 1;">favorite</span>
+                    </button>
+                </div>
+            </div>
+            <main>
+                <!-- Profile Image Header -->
+                <div class="w-full aspect-square bg-slate-200 relative">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQW0-Stt1fzRc5QBB3QVHPpBqF24tygY9PQ2fpjXtGEQy38BOiBsVLZhJjbVuhpMpCLMhTkEThnmBsh0YftfhkeUTzIbg-noq8DooBkHNFH4yM61HGvoHbDE3IqoHDaWM9njiUfvEq7RkjXYsMrrPMoq-Uoa3V3fs7_h6w01TcDxjMBrf0dlfgmT2iic0r6d3p3FvYl1p5G9r-OV-VeK60c9fOegqmLikndaGWnMLFtKAlt20QAqDZDW5dJmUgF7zNn8tg-vSNnxE"
+                        class="w-full h-full object-cover" />
+                    <!-- Badge -->
+                    <div
+                        class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg border border-white/50 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined filled text-emerald-500 text-[18px]"
+                            style="font-variation-settings: 'FILL' 1;">verified</span>
+                        <span class="text-[13px] font-bold text-slate-800">KYC Verified</span>
+                    </div>
+                </div>
+
+                <div class="px-5 pt-6 bg-white relative -mt-6 rounded-t-3xl min-h-[300px]">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h1 class="text-3xl font-bold text-slate-900 leading-tight">Sarah Jensen</h1>
+                            <p class="text-[15px] font-medium text-slate-500 mt-1">Math Tutor & Tech Support</p>
+                        </div>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="flex items-center gap-6 mb-8 mt-2 py-4 border-y border-slate-100">
+                        <div class="flex flex-col">
+                            <div class="flex items-center gap-1 text-amber-400">
+                                <span class="material-symbols-outlined filled text-[20px]"
+                                    style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="text-[18px] font-bold text-slate-900">4.9</span>
+                            </div>
+                            <span class="text-[12px] font-medium text-slate-500">24 Reviews</span>
+                        </div>
+                        <div class="w-px h-8 bg-slate-200"></div>
+                        <div class="flex flex-col">
+                            <span class="text-[18px] font-bold text-slate-900">86</span>
+                            <span class="text-[12px] font-medium text-slate-500">Jobs Completed</span>
+                        </div>
+                        <div class="w-px h-8 bg-slate-200"></div>
+                        <div class="flex flex-col">
+                            <span class="text-[18px] font-bold text-slate-900">98%</span>
+                            <span class="text-[12px] font-medium text-slate-500">Response Rate</span>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <h2 class="text-[18px] font-bold text-slate-900 mb-2">About Sarah</h2>
+                    <p class="text-[15px] text-slate-600 leading-relaxed font-medium">
+                        Hi! I'm Sarah. I'm a college graduate with a degree in Mathematics and Computer Science. I
+                        specialize in helping students from K-12 and College level ace their mathematics exams. I also
+                        do freelance IT support on the side! Let me know how I can help you today.
+                    </p>
+
+                    <!-- Fixed Action Bar -->
+                    <div
+                        class="fixed bottom-0 left-0 right-0 p-5 bg-white/90 backdrop-blur-xl border-t border-slate-200 z-50 md:max-w-md md:mx-auto pb-safe">
+                        <div class="flex items-center gap-4">
+                            <button onclick="openModal('modal-chat')"
+                                class="h-14 w-14 shrink-0 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-bold">
+                                <span class="material-symbols-outlined text-2xl">chat</span>
+                            </button>
+                            <button onclick="openBookingModal('Help from Sarah Jensen', '₹450/hr')"
+                                class="flex-1 h-14 bg-primary text-white rounded-2xl font-bold text-[17px] shadow-sm hover:bg-primary/90 transition shadow-primary/30 flex items-center justify-center gap-2">
+                                Request Help
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+        <!-- END_VIEW_USER_DETAILS -->
+
+        <!-- BOTTOM NAV -->
+        <nav class="fixed bottom-0 left-0 right-0 z-50 glass-nav pb-safe md:max-w-md md:mx-auto">
+            <div class="flex items-center justify-between px-6 py-3">
+                <button onclick="navigate('discovery')" id="nav-discovery"
+                    class="group flex flex-col items-center gap-1 nav-btn">
+                    <span class="material-symbols-outlined text-[28px] text-sf-gray/50 transition-colors">home</span>
+                    <span class="text-[10px] font-medium text-sf-gray/50">Home</span>
+                </button>
+                <button onclick="navigate('wallet')" id="nav-wallet"
+                    class="group flex flex-col items-center gap-1 nav-btn">
+                    <span
+                        class="material-symbols-outlined text-[28px] text-sf-gray/50 transition-colors">account_balance_wallet</span>
+                    <span class="text-[10px] font-medium text-sf-gray/50">Wallet</span>
+                </button>
+                <button onclick="navigate('bookings')" id="nav-bookings"
+                    class="group flex flex-col items-center gap-1 nav-btn relative">
+                    <div class="absolute -top-1 right-1 w-2 h-2 bg-primary rounded-full"></div>
+                    <span
+                        class="material-symbols-outlined text-[28px] text-sf-gray/50 transition-colors">calendar_month</span>
+                    <span class="text-[10px] font-medium text-sf-gray/50">Bookings</span>
+                </button>
+                <button onclick="navigate('profile')" id="nav-profile"
+                    class="group flex flex-col items-center gap-1 nav-btn">
+                    <span class="material-symbols-outlined text-[28px] text-sf-gray/50 transition-colors">person</span>
+                    <span class="text-[10px] font-medium text-sf-gray/50">Profile</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ===================== MODALS ===================== -->
+
+    <!-- BOOKING MODAL -->
+    <div id="modal-booking" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-booking')">
+        <div class="modal-sheet">
+            <div class="modal-handle"></div>
+            <h2 id="booking-modal-title" class="text-xl font-bold text-slate-900 mb-1">Book Service</h2>
+            <p id="booking-modal-price" class="text-sm text-slate-500 mb-5">Starting at ₹200/hr</p>
+
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Select Date</label>
+            <input type="date" id="booking-date"
+                class="w-full h-12 rounded-xl border border-slate-200 px-4 mb-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm" />
+
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Select Time Slot</label>
+            <div class="grid grid-cols-3 gap-2 mb-4" id="time-slots">
+                <button onclick="selectTimeSlot(this)"
+                    class="time-slot-btn py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">9:00
+                    AM</button>
+                <button onclick="selectTimeSlot(this)"
+                    class="time-slot-btn py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">10:00
+                    AM</button>
+                <button onclick="selectTimeSlot(this)"
+                    class="time-slot-btn py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">11:00
+                    AM</button>
+                <button onclick="selectTimeSlot(this)"
+                    class="time-slot-btn py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">2:00
+                    PM</button>
+                <button onclick="selectTimeSlot(this)"
+                    class="time-slot-btn py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">4:00
+                    PM</button>
+                <button onclick="selectTimeSlot(this)"
+                    class="time-slot-btn py-2.5 rounded-xl border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">6:00
+                    PM</button>
+            </div>
+
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Your Address</label>
+            <input type="text" placeholder="Enter your address..."
+                class="w-full h-12 rounded-xl border border-slate-200 px-4 mb-6 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm" />
+
+            <button onclick="confirmBooking()"
+                class="w-full h-14 bg-primary text-white rounded-2xl font-bold text-[17px] shadow-sm hover:bg-primary/90 transition flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined">check_circle</span>
+                Confirm Booking
+            </button>
+        </div>
+    </div>
+
+    <!-- BOOKING SUCCESS MODAL -->
+    <div id="modal-booking-success" class="modal-overlay center-modal"
+        onclick="if(event.target===this)closeModal('modal-booking-success')">
+        <div class="modal-center">
+            <div class="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4 scale-in">
+                <span class="material-symbols-outlined text-emerald-500 text-[48px]">check_circle</span>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900 mb-2">Booking Confirmed!</h2>
+            <p class="text-slate-500 text-[15px] mb-6">Your Saha helper will reach out to you shortly. You can track the
+                status in your bookings.</p>
+            <button onclick="closeModal('modal-booking-success'); navigate('bookings')"
+                class="w-full h-12 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition">View
+                My Bookings</button>
+            <button onclick="closeModal('modal-booking-success')"
+                class="w-full h-12 text-slate-500 font-medium mt-2 hover:text-slate-700 transition">Close</button>
+        </div>
+    </div>
+
+    <!-- REVIEW MODAL -->
+    <div id="modal-review" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-review')">
+        <div class="modal-sheet">
+            <div class="modal-handle"></div>
+            <h2 class="text-xl font-bold text-slate-900 mb-1">Rate & Review</h2>
+            <p class="text-sm text-slate-500 mb-5">How was your experience with this service?</p>
+
+            <div class="flex justify-center mb-6">
+                <div class="star-rating" id="review-stars">
+                    <button onclick="setRating(1)" class="star-btn"><span class="material-symbols-outlined text-[36px]"
+                            style="font-variation-settings:'FILL' 1;">star</span></button>
+                    <button onclick="setRating(2)" class="star-btn"><span class="material-symbols-outlined text-[36px]"
+                            style="font-variation-settings:'FILL' 1;">star</span></button>
+                    <button onclick="setRating(3)" class="star-btn"><span class="material-symbols-outlined text-[36px]"
+                            style="font-variation-settings:'FILL' 1;">star</span></button>
+                    <button onclick="setRating(4)" class="star-btn"><span class="material-symbols-outlined text-[36px]"
+                            style="font-variation-settings:'FILL' 1;">star</span></button>
+                    <button onclick="setRating(5)" class="star-btn"><span class="material-symbols-outlined text-[36px]"
+                            style="font-variation-settings:'FILL' 1;">star</span></button>
+                </div>
+            </div>
+            <p id="rating-text" class="text-center text-sm font-medium text-slate-500 mb-4">Tap a star to rate</p>
+
+            <textarea placeholder="Share your experience…"
+                class="w-full h-24 rounded-xl border border-slate-200 p-4 mb-6 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm resize-none"></textarea>
+
+            <button onclick="submitReview()"
+                class="w-full h-14 bg-primary text-white rounded-2xl font-bold text-[17px] shadow-sm hover:bg-primary/90 transition">Submit
+                Review</button>
+        </div>
+    </div>
+
+    <!-- ADD MONEY MODAL -->
+    <div id="modal-add-money" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-add-money')">
+        <div class="modal-sheet">
+            <div class="modal-handle"></div>
+            <h2 class="text-xl font-bold text-slate-900 mb-5">Add Money to Wallet</h2>
+
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Amount (₹)</label>
+            <input type="number" id="add-money-amount" placeholder="Enter amount"
+                class="w-full h-12 rounded-xl border border-slate-200 px-4 mb-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm" />
+            <div class="flex gap-2 mb-6">
+                <button onclick="document.getElementById('add-money-amount').value=100"
+                    class="flex-1 py-2 rounded-lg border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">₹100</button>
+                <button onclick="document.getElementById('add-money-amount').value=500"
+                    class="flex-1 py-2 rounded-lg border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">₹500</button>
+                <button onclick="document.getElementById('add-money-amount').value=1000"
+                    class="flex-1 py-2 rounded-lg border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">₹1,000</button>
+                <button onclick="document.getElementById('add-money-amount').value=2000"
+                    class="flex-1 py-2 rounded-lg border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">₹2,000</button>
+            </div>
+
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Payment Method</label>
+            <div class="flex flex-col gap-2 mb-6">
+                <label
+                    class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5 transition">
+                    <input type="radio" name="payment-method" value="upi" checked class="accent-primary" />
+                    <span class="text-sm font-medium text-slate-700">UPI</span>
+                </label>
+                <label
+                    class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5 transition">
+                    <input type="radio" name="payment-method" value="card" class="accent-primary" />
+                    <span class="text-sm font-medium text-slate-700">Debit / Credit Card</span>
+                </label>
+                <label
+                    class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5 transition">
+                    <input type="radio" name="payment-method" value="bank" class="accent-primary" />
+                    <span class="text-sm font-medium text-slate-700">Net Banking</span>
+                </label>
+            </div>
+
+            <button onclick="processWalletAction('added')"
+                class="w-full h-14 bg-primary text-white rounded-2xl font-bold text-[17px] shadow-sm hover:bg-primary/90 transition">Add
+                Money</button>
+        </div>
+    </div>
+
+    <!-- WITHDRAW MODAL -->
+    <div id="modal-withdraw" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-withdraw')">
+        <div class="modal-sheet">
+            <div class="modal-handle"></div>
+            <h2 class="text-xl font-bold text-slate-900 mb-1">Withdraw Funds</h2>
+            <p class="text-sm text-slate-500 mb-5">Available balance: ₹2,450</p>
+
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Amount (₹)</label>
+            <input type="number" id="withdraw-amount" placeholder="Enter amount" max="2450"
+                class="w-full h-12 rounded-xl border border-slate-200 px-4 mb-3 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm" />
+            <div class="flex gap-2 mb-6">
+                <button onclick="document.getElementById('withdraw-amount').value=500"
+                    class="flex-1 py-2 rounded-lg border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">₹500</button>
+                <button onclick="document.getElementById('withdraw-amount').value=1000"
+                    class="flex-1 py-2 rounded-lg border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">₹1,000</button>
+                <button onclick="document.getElementById('withdraw-amount').value=2450"
+                    class="flex-1 py-2 rounded-lg border border-slate-200 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary transition">Max</button>
+            </div>
+
+            <label class="block text-sm font-semibold text-slate-700 mb-2">Withdraw To</label>
+            <div class="flex flex-col gap-2 mb-6">
+                <label
+                    class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5 transition">
+                    <input type="radio" name="withdraw-to" value="bank" checked class="accent-primary" />
+                    <div>
+                        <span class="text-sm font-medium text-slate-700">Bank Account</span>
+                        <p class="text-xs text-slate-500">HDFC •••• 4821</p>
+                    </div>
+                </label>
+                <label
+                    class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/5 transition">
+                    <input type="radio" name="withdraw-to" value="upi" class="accent-primary" />
+                    <div>
+                        <span class="text-sm font-medium text-slate-700">UPI</span>
+                        <p class="text-xs text-slate-500">jaideep@paytm</p>
+                    </div>
+                </label>
+            </div>
+
+            <button onclick="processWalletAction('withdrawn')"
+                class="w-full h-14 bg-primary text-white rounded-2xl font-bold text-[17px] shadow-sm hover:bg-primary/90 transition">Withdraw</button>
+        </div>
+    </div>
+
+    <!-- CHAT MODAL -->
+    <div id="modal-chat" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-chat')">
+        <div class="modal-sheet" style="max-height:85vh;display:flex;flex-direction:column;padding-bottom:0;">
+            <div class="modal-handle"></div>
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+                <div class="relative">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQW0-Stt1fzRc5QBB3QVHPpBqF24tygY9PQ2fpjXtGEQy38BOiBsVLZhJjbVuhpMpCLMhTkEThnmBsh0YftfhkeUTzIbg-noq8DooBkHNFH4yM61HGvoHbDE3IqoHDaWM9njiUfvEq7RkjXYsMrrPMoq-Uoa3V3fs7_h6w01TcDxjMBrf0dlfgmT2iic0r6d3p3FvYl1p5G9r-OV-VeK60c9fOegqmLikndaGWnMLFtKAlt20QAqDZDW5dJmUgF7zNn8tg-vSNnxE"
+                        class="w-10 h-10 rounded-full object-cover" />
+                    <div
+                        class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white pulse-dot">
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-900">Sarah Jensen</h3>
+                    <p class="text-xs text-green-500 font-medium">Online</p>
+                </div>
+            </div>
+
+            <div id="chat-messages" class="flex-1 overflow-y-auto flex flex-col gap-3 py-2 min-h-[250px]">
+                <div class="chat-bubble received">Hi! I saw you need help. When works best for you?</div>
+                <div class="chat-bubble sent">Hi Sarah! Is tomorrow at 10 AM okay?</div>
+                <div class="chat-bubble received">That works perfectly! I'll be there. 😊</div>
+            </div>
+
+            <div class="flex items-center gap-2 pt-3 pb-5 border-t border-slate-100 mt-2">
+                <input type="text" id="chat-input" placeholder="Type a message..."
+                    class="flex-1 h-12 bg-slate-100 rounded-full px-4 text-sm focus:outline-none focus:ring-1 focus:ring-primary border-transparent"
+                    onkeydown="if(event.key==='Enter')sendChatMessage()" />
+                <button onclick="sendChatMessage()"
+                    class="h-12 w-12 bg-primary rounded-full flex items-center justify-center text-white shrink-0 hover:bg-primary/90 transition">
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TRACKER MODAL -->
+    <div id="modal-tracker" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-tracker')">
+        <div class="modal-sheet">
+            <div class="modal-handle"></div>
+            <h2 class="text-xl font-bold text-slate-900 mb-4">Tracking Helper</h2>
+
+            <div class="w-full h-48 rounded-2xl bg-slate-100 mb-4 relative overflow-hidden">
+                <div class="absolute inset-0 bg-cover bg-center opacity-60"
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBkLdBfotjNrT6JYTCDhEVZnaYXVFMGXsGANsA1L8GYRs5cfT42-lUUe3JLAx_gPIwcputrlNxeX7m1Gqm4jgSnuZmB-x18TT8tbrqmZ8Ls6P63o-9f941YprpDrSiJ9bnF5g9FgFIsS24Eo-bVMa-k2N3xfLOwIA38xHp9fp31RyegJkv-gH01yKGJVl2wnmCn9nyk0pluuCT3h6Gxx858hoUO8oyaYsSjfm1lfr-ECUZPZ_o-zMk-HzT9JU6mcuNXfmgnRiJ_7kk');">
+                </div>
+                <div
+                    class="absolute top-1/3 left-1/3 w-4 h-4 bg-primary rounded-full shadow-lg ring-4 ring-primary/20 animate-bounce">
+                </div>
+                <div
+                    class="absolute bottom-1/3 right-1/4 w-3 h-3 bg-emerald-500 rounded-full shadow-lg ring-4 ring-emerald-500/20">
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 bg-slate-50 p-4 rounded-xl mb-4">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuChCSyq2kW94PHUH4oNt31ZNGJH3zMF5W1A7UuuOHCsdBEpnWfdCPGf7-aAHMk_UwIZzGOWYdvuo9XJcIrnu-9lwRMtfuXwJWiBjSLXlX4nMbYUG5sI9mqZaiKLUwHKNo_0Zna2foAhnp0fRJ_B00OrL7oBn_iaIx4ktNLoKaJMB0T3LaioUc6Ds_ELZCHOfj0ysADi1xKQ85iafwgH96HNky2KKVHwO8iSHYV9HGcl2CAVLbsf84HLplMcbXaEfnr66Mtgp5NxOVI"
+                    class="w-12 h-12 rounded-full object-cover" />
+                <div>
+                    <h4 class="font-bold text-slate-900">Aarav S. is on the way</h4>
+                    <p class="text-sm text-slate-500">Arriving in ~8 mins • 1.2 km away</p>
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="openModal('modal-chat'); closeModal('modal-tracker')"
+                    class="flex-1 h-12 bg-slate-100 text-slate-900 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-slate-200 transition">
+                    <span class="material-symbols-outlined text-lg">chat</span>Message
+                </button>
+                <button onclick="openModal('modal-call'); closeModal('modal-tracker')"
+                    class="flex-1 h-12 bg-primary text-white rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-primary/90 transition">
+                    <span class="material-symbols-outlined text-lg">call</span>Call
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CALL DIALOG -->
+    <div id="modal-call" class="modal-overlay center-modal" onclick="if(event.target===this)closeModal('modal-call')">
+        <div class="modal-center">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuChCSyq2kW94PHUH4oNt31ZNGJH3zMF5W1A7UuuOHCsdBEpnWfdCPGf7-aAHMk_UwIZzGOWYdvuo9XJcIrnu-9lwRMtfuXwJWiBjSLXlX4nMbYUG5sI9mqZaiKLUwHKNo_0Zna2foAhnp0fRJ_B00OrL7oBn_iaIx4ktNLoKaJMB0T3LaioUc6Ds_ELZCHOfj0ysADi1xKQ85iafwgH96HNky2KKVHwO8iSHYV9HGcl2CAVLbsf84HLplMcbXaEfnr66Mtgp5NxOVI"
+                class="w-20 h-20 rounded-full object-cover mx-auto mb-4 ring-4 ring-primary/20" />
+            <h2 class="text-xl font-bold text-slate-900 mb-1">Call Aarav S.</h2>
+            <p class="text-sm text-slate-500 mb-6">+91 •••••• 4821</p>
+            <div class="flex gap-3">
+                <button onclick="closeModal('modal-call')"
+                    class="flex-1 h-12 bg-slate-100 text-slate-900 rounded-xl font-semibold hover:bg-slate-200 transition">Cancel</button>
+                <button onclick="closeModal('modal-call'); showToast('📞 Calling Aarav S...', 'call')"
+                    class="flex-1 h-12 bg-emerald-500 text-white rounded-xl font-semibold hover:bg-emerald-600 transition flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-lg">call</span>Call Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKING DETAIL MODAL -->
+    <div id="modal-booking-detail" class="modal-overlay"
+        onclick="if(event.target===this)closeModal('modal-booking-detail')">
+        <div class="modal-sheet">
+            <div class="modal-handle"></div>
+            <h2 class="text-xl font-bold text-slate-900 mb-4">Booking Details</h2>
+
+            <div class="flex items-center gap-3 mb-4 pb-4 border-b border-slate-100">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQW0-Stt1fzRc5QBB3QVHPpBqF24tygY9PQ2fpjXtGEQy38BOiBsVLZhJjbVuhpMpCLMhTkEThnmBsh0YftfhkeUTzIbg-noq8DooBkHNFH4yM61HGvoHbDE3IqoHDaWM9njiUfvEq7RkjXYsMrrPMoq-Uoa3V3fs7_h6w01TcDxjMBrf0dlfgmT2iic0r6d3p3FvYl1p5G9r-OV-VeK60c9fOegqmLikndaGWnMLFtKAlt20QAqDZDW5dJmUgF7zNn8tg-vSNnxE"
+                    class="w-14 h-14 rounded-full object-cover" />
+                <div>
+                    <h3 class="font-bold text-[17px] text-slate-900">Priya M.</h3>
+                    <p class="text-sm text-slate-500">Plumbing Repair</p>
+                </div>
+                <span
+                    class="ml-auto bg-orange-100 text-orange-700 px-2.5 py-1 rounded-full text-xs font-bold uppercase">Pending</span>
+            </div>
+
+            <div class="space-y-3 mb-6">
+                <div class="flex items-center gap-3 text-sm">
+                    <span class="material-symbols-outlined text-slate-400 text-xl">calendar_month</span>
+                    <div>
+                        <p class="font-semibold text-slate-900">Tomorrow</p>
+                        <p class="text-slate-500">10:00 AM</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 text-sm">
+                    <span class="material-symbols-outlined text-slate-400 text-xl">location_on</span>
+                    <div>
+                        <p class="font-semibold text-slate-900">Your Location</p>
+                        <p class="text-slate-500">Sector 4, Rohini, Delhi</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 text-sm">
+                    <span class="material-symbols-outlined text-slate-400 text-xl">payments</span>
+                    <div>
+                        <p class="font-semibold text-slate-900">Estimated Cost</p>
+                        <p class="text-slate-500">₹400 – ₹600</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="closeModal('modal-booking-detail'); showToast('❌ Booking cancelled', 'error')"
+                    class="flex-1 h-12 bg-red-50 text-red-600 rounded-xl font-semibold hover:bg-red-100 transition">Cancel
+                    Booking</button>
+                <button onclick="closeModal('modal-booking-detail'); openModal('modal-chat')"
+                    class="flex-1 h-12 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition">Message</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PERSONAL INFO MODAL -->
+    <div id="modal-personal-info" class="modal-overlay"
+        onclick="if(event.target===this)closeModal('modal-personal-info')">
+        <div class="modal-sheet">
+            <div class="modal-handle"></div>
+            <h2 class="text-xl font-bold text-slate-900 mb-5">Personal Information</h2>
+
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Full Name</label>
+            <input type="text" value="Jaideep Rawal"
+                class="w-full h-12 rounded-xl border border-slate-200 px-4 mb-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm" />
+
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Email</label>
+            <input type="email" value="jaideep@example.com"
+                class="w-full h-12 rounded-xl border border-slate-200 px-4 mb-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm" />
+
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Phone</label>
+            <input type="tel" value="+91 98765 43210"
+                class="w-full h-12 rounded-xl border border-slate-200 px-4 mb-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm" />
+
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Bio</label>
+            <textarea
+                class="w-full h-20 rounded-xl border border-slate-200 p-4 mb-6 focus:border-primary focus:ring-1 focus:ring-primary outline-none text-sm resize-none">Student & part-time freelancer</textarea>
+
+            <button onclick="closeModal('modal-personal-info'); showToast('✅ Profile updated', 'success')"
+                class="w-full h-14 bg-primary text-white rounded-2xl font-bold text-[17px] shadow-sm hover:bg-primary/90 transition">Save
+                Changes</button>
+        </div>
+    </div>
+
+    <!-- SAVED ADDRESSES MODAL -->
+    <div id="modal-addresses" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-addresses')">
+        <div class="modal-sheet">
+            <div class="modal-handle"></div>
+            <h2 class="text-xl font-bold text-slate-900 mb-5">Saved Addresses</h2>
+
+            <div class="flex flex-col gap-3 mb-6" id="addresses-list">
+                <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="material-symbols-outlined text-primary text-2xl shrink-0">home</span>
+                    <div class="flex-1">
+                        <h4 class="font-semibold text-slate-900 text-sm">Home</h4>
+                        <p class="text-xs text-slate-500">42, Sector 4, Rohini, Delhi 110085</p>
+                    </div>
+                    <button onclick="this.closest('div.flex').remove(); showToast('🗑 Address removed')"
+                        class="text-slate-400 hover:text-red-500 transition"><span
+                            class="material-symbols-outlined text-xl">delete</span></button>
+                </div>
+                <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                    <span class="material-symbols-outlined text-primary text-2xl shrink-0">apartment</span>
+                    <div class="flex-1">
+                        <h4 class="font-semibold text-slate-900 text-sm">Office</h4>
+                        <p class="text-xs text-slate-500">Connaught Place, New Delhi 110001</p>
+                    </div>
+                    <button onclick="this.closest('div.flex').remove(); showToast('🗑 Address removed')"
+                        class="text-slate-400 hover:text-red-500 transition"><span
+                            class="material-symbols-outlined text-xl">delete</span></button>
+                </div>
+            </div>
+
+            <button onclick="showToast('📍 Add address feature coming soon!'); closeModal('modal-addresses')"
+                class="w-full h-12 bg-primary/10 text-primary rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-primary/20 transition">
+                <span class="material-symbols-outlined">add</span>Add New Address
+            </button>
+        </div>
+    </div>
+
+    <!-- HELP & SUPPORT MODAL -->
+    <div id="modal-help-support" class="modal-overlay"
+        onclick="if(event.target===this)closeModal('modal-help-support')">
+        <div class="modal-sheet">
+            <div class="modal-handle"></div>
+            <h2 class="text-xl font-bold text-slate-900 mb-5">Help & Support</h2>
+
+            <div class="flex flex-col gap-2 mb-6">
+                <details class="group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-4 cursor-pointer font-semibold text-sm text-slate-900">
+                        How do bookings work?<span
+                            class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <p class="px-4 pb-4 text-sm text-slate-600 -mt-1">Browse helpers by category, select one, pick a
+                        date & time, and confirm. The payment is held in escrow until the job is completed.</p>
+                </details>
+                <details class="group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-4 cursor-pointer font-semibold text-sm text-slate-900">
+                        How does payment work?<span
+                            class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <p class="px-4 pb-4 text-sm text-slate-600 -mt-1">Payments are secured through our escrow system.
+                        Money is only released to the helper after you confirm the job is done.</p>
+                </details>
+                <details class="group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-4 cursor-pointer font-semibold text-sm text-slate-900">
+                        How do I cancel a booking?<span
+                            class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <p class="px-4 pb-4 text-sm text-slate-600 -mt-1">Go to Bookings → tap on the booking → Cancel.
+                        Cancellations within 1 hour of booking are free. After that, a 10% fee may apply.</p>
+                </details>
+                <details class="group bg-slate-50 rounded-xl border border-slate-100 overflow-hidden">
+                    <summary
+                        class="flex items-center justify-between p-4 cursor-pointer font-semibold text-sm text-slate-900">
+                        How do I become a helper?<span
+                            class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <p class="px-4 pb-4 text-sm text-slate-600 -mt-1">Switch to "Earning" mode from bookings, complete
+                        your KYC verification, and set up your services and pricing.</p>
+                </details>
+            </div>
+
+            <button onclick="showToast('📧 Support email: help@saha.in'); closeModal('modal-help-support')"
+                class="w-full h-12 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-lg">email</span>Contact Support
+            </button>
+        </div>
+    </div>
+
+    <!-- SIGN OUT CONFIRMATION -->
+    <div id="modal-signout" class="modal-overlay center-modal"
+        onclick="if(event.target===this)closeModal('modal-signout')">
+        <div class="modal-center">
+            <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4">
+                <span class="material-symbols-outlined text-red-500 text-3xl">logout</span>
+            </div>
+            <h2 class="text-xl font-bold text-slate-900 mb-2">Sign Out?</h2>
+            <p class="text-sm text-slate-500 mb-6">Are you sure you want to sign out of your Saha account?</p>
+            <div class="flex gap-3">
+                <button onclick="closeModal('modal-signout')"
+                    class="flex-1 h-12 bg-slate-100 text-slate-900 rounded-xl font-semibold hover:bg-slate-200 transition">Cancel</button>
+                <button
+                    onclick="closeModal('modal-signout'); showToast('👋 Signed out successfully'); navigate('discovery')"
+                    class="flex-1 h-12 bg-red-500 text-white rounded-xl font-semibold hover:bg-red-600 transition">Sign
+                    Out</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATIONS MODAL -->
+    <div id="modal-notifications" class="modal-overlay"
+        onclick="if(event.target===this)closeModal('modal-notifications')">
+        <div class="modal-sheet">
+            <div class="modal-handle"></div>
+            <div class="flex items-center justify-between mb-5">
+                <h2 class="text-xl font-bold text-slate-900">Notifications</h2>
+                <button
+                    onclick="document.querySelectorAll('#notif-list .notif-dot').forEach(d=>d.remove()); showToast('✅ All marked as read')"
+                    class="text-sm text-primary font-semibold hover:text-primary/80 transition">Mark all read</button>
+            </div>
+
+            <div id="notif-list" class="flex flex-col gap-3">
+                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-xl border border-white/5 relative">
+                    <div class="notif-dot absolute top-3 right-3 w-2 h-2 bg-primary rounded-full"></div>
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0"><span
+                            class="material-symbols-outlined text-primary text-xl">calendar_month</span></div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900">Booking Confirmed</h4>
+                        <p class="text-xs text-slate-500">Aarav S. confirmed your cleaning for today at 2 PM</p>
+                        <p class="text-[10px] text-slate-400 mt-1">5 min ago</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-3 bg-white/5 rounded-xl border border-white/5 relative">
+                    <div class="notif-dot absolute top-3 right-3 w-2 h-2 bg-primary rounded-full"></div>
+                    <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center shrink-0"><span
+                            class="material-symbols-outlined text-emerald-600 text-xl">payments</span></div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900">Payment Received</h4>
+                        <p class="text-xs text-slate-500">₹170 settled for Math Tutoring with Sharma Ji</p>
+                        <p class="text-[10px] text-slate-400 mt-1">2 hours ago</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-3 rounded-xl border border-slate-100">
+                    <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0"><span
+                            class="material-symbols-outlined text-amber-600 text-xl">star</span></div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900">New Review</h4>
+                        <p class="text-xs text-slate-500">You received a 5-star review from Ravi Kumar</p>
+                        <p class="text-[10px] text-slate-400 mt-1">Yesterday</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-3 rounded-xl border border-slate-100">
+                    <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center shrink-0"><span
+                            class="material-symbols-outlined text-purple-600 text-xl">campaign</span></div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900">Weekend Special</h4>
+                        <p class="text-xs text-slate-500">Get 20% off on all cleaning services this weekend!</p>
+                        <p class="text-[10px] text-slate-400 mt-1">2 days ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== APP LOGIC ===================== -->
+    <script>
+        let isProviderMode = false;
+        let navHistory = ['discovery'];
+        let currentRating = 0;
+
+        // ===== NAVIGATION =====
+        function navigate(viewId) {
+            document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn span:first-child').forEach(el => {
+                el.classList.remove('text-primary'); el.classList.add('text-sf-gray/50');
+                el.style.fontVariationSettings = "'FILL' 0, 'wght' 400";
+            });
+            document.querySelectorAll('.nav-btn span:last-child').forEach(el => {
+                el.classList.remove('text-primary'); el.classList.add('text-sf-gray/50');
+            });
+
+            if (viewId === 'bookings') {
+                viewId = isProviderMode ? 'provider-bookings' : 'client-bookings';
+                activateNav('nav-bookings');
+            } else if (viewId === 'provider-bookings' || viewId === 'client-bookings') {
+                activateNav('nav-bookings');
+            } else if (['math-detail', 'category-groceries', 'category-tech', 'category-pets', 'search-other', 'user-details'].includes(viewId)) {
+                activateNav('nav-discovery');
+            } else {
+                activateNav('nav-' + viewId);
+            }
+
+            const viewEl = document.getElementById('view-' + viewId);
+            if (viewEl) viewEl.classList.add('active');
+            window.scrollTo(0, 0);
+
+            // Push to nav history (avoid duplicates at top)
+            if (navHistory[navHistory.length - 1] !== viewId) {
+                navHistory.push(viewId);
+            }
+        }
+
+        function goBack() {
+            if (navHistory.length > 1) {
+                navHistory.pop();
+                const prev = navHistory[navHistory.length - 1];
+                // Navigate without pushing again
+                document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.nav-btn span:first-child').forEach(el => {
+                    el.classList.remove('text-primary'); el.classList.add('text-sf-gray/50');
+                    el.style.fontVariationSettings = "'FILL' 0, 'wght' 400";
+                });
+                document.querySelectorAll('.nav-btn span:last-child').forEach(el => {
+                    el.classList.remove('text-primary'); el.classList.add('text-sf-gray/50');
+                });
+                if (['math-detail', 'category-groceries', 'category-tech', 'category-pets', 'search-other', 'user-details'].includes(prev)) {
+                    activateNav('nav-discovery');
+                } else if (prev === 'client-bookings' || prev === 'provider-bookings') {
+                    activateNav('nav-bookings');
+                } else {
+                    activateNav('nav-' + prev);
+                }
+                const viewEl = document.getElementById('view-' + prev);
+                if (viewEl) viewEl.classList.add('active');
+                window.scrollTo(0, 0);
+            } else {
+                navigate('discovery');
+            }
+        }
+
+        function activateNav(navId) {
+            const btn = document.getElementById(navId);
+            if (btn) {
+                const spans = btn.querySelectorAll('span');
+                if (spans.length >= 2) {
+                    const iconSpan = spans[0];
+                    const textSpan = spans[spans.length - 1];
+                    iconSpan.classList.remove('text-sf-gray/50'); iconSpan.classList.add('text-primary');
+                    iconSpan.style.fontVariationSettings = "'FILL' 1, 'wght' 400";
+                    textSpan.classList.remove('text-sf-gray/50'); textSpan.classList.add('text-primary');
+                }
+            }
+        }
+
+        function toggleProviderMode(mode) {
+            isProviderMode = mode;
+            navigate('bookings');
+        }
+
+        // ===== MODAL SYSTEM =====
+        function openModal(modalId) {
+            document.getElementById(modalId)?.classList.add('active');
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId)?.classList.remove('active');
+        }
+
+        // ===== TOAST =====
+        function showToast(message, type) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            const iconMap = { success: 'check_circle', error: 'error', call: 'call', info: 'info' };
+            const icon = iconMap[type] || '';
+            toast.innerHTML = (icon ? `<span class="material-symbols-outlined text-lg">${icon}</span>` : '') + message;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // ===== BOOKING =====
+        function openBookingModal(title, price, isUrgent) {
+            document.getElementById('booking-modal-title').textContent = (isUrgent ? '⚡ ' : '') + title;
+            document.getElementById('booking-modal-price').textContent = price;
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('booking-date').value = today;
+            // Reset time slots
+            document.querySelectorAll('.time-slot-btn').forEach(b => {
+                b.classList.remove('bg-primary', 'text-white', 'border-primary');
+                b.classList.add('border-slate-200', 'text-slate-700');
+            });
+            openModal('modal-booking');
+        }
+
+        function selectTimeSlot(btn) {
+            document.querySelectorAll('.time-slot-btn').forEach(b => {
+                b.classList.remove('bg-primary', 'text-white', 'border-primary');
+                b.classList.add('border-slate-200', 'text-slate-700');
+            });
+            btn.classList.remove('border-slate-200', 'text-slate-700');
+            btn.classList.add('bg-primary', 'text-white', 'border-primary');
+        }
+
+        function confirmBooking() {
+            closeModal('modal-booking');
+            setTimeout(() => openModal('modal-booking-success'), 300);
+        }
+
+        // ===== REVIEW =====
+        function setRating(stars) {
+            currentRating = stars;
+            const labels = ['', 'Poor', 'Fair', 'Good', 'Great', 'Excellent!'];
+            document.getElementById('rating-text').textContent = labels[stars] + ' — ' + stars + '/5';
+            document.querySelectorAll('#review-stars .star-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i < stars);
+            });
+        }
+
+        function submitReview() {
+            if (currentRating === 0) { showToast('Please select a rating', 'error'); return; }
+            closeModal('modal-review');
+            showToast('⭐ Review submitted! Thanks for your feedback', 'success');
+            currentRating = 0;
+        }
+
+        // ===== WALLET =====
+        function processWalletAction(action) {
+            const id = action === 'added' ? 'add-money-amount' : 'withdraw-amount';
+            const amount = document.getElementById(id).value;
+            if (!amount || amount <= 0) { showToast('Please enter a valid amount', 'error'); return; }
+            closeModal(action === 'added' ? 'modal-add-money' : 'modal-withdraw');
+            showToast(`💰 ₹${amount} ${action} successfully!`, 'success');
+        }
+
+        // ===== CHAT =====
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const msg = input.value.trim();
+            if (!msg) return;
+            const container = document.getElementById('chat-messages');
+            const bubble = document.createElement('div');
+            bubble.className = 'chat-bubble sent';
+            bubble.textContent = msg;
+            container.appendChild(bubble);
+            input.value = '';
+            container.scrollTop = container.scrollHeight;
+
+            // Auto-reply after a brief delay
+            setTimeout(() => {
+                const replies = [
+                    'Got it! I will note that down.',
+                    'Sounds good to me! 👍',
+                    'Sure, no problem at all.',
+                    'I will be there on time!',
+                    "That's fine, see you then! 😊"
+                ];
+                const reply = document.createElement('div');
+                reply.className = 'chat-bubble received';
+                reply.textContent = replies[Math.floor(Math.random() * replies.length)];
+                container.appendChild(reply);
+                container.scrollTop = container.scrollHeight;
+            }, 1200);
+        }
+
+        // ===== ADD HELPER =====
+        function addHelper(btn, name) {
+            const icon = btn.querySelector('span');
+            if (icon.textContent === 'add') {
+                icon.textContent = 'check';
+                btn.classList.add('bg-primary', 'text-white');
+                btn.classList.remove('bg-slate-100', 'text-sf-gray');
+                showToast(`✅ ${name} added to your list`);
+            } else {
+                icon.textContent = 'add';
+                btn.classList.remove('bg-primary', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-sf-gray');
+                showToast(`Removed ${name} from your list`);
+            }
+        }
+
+        // ===== SHARE & FAVORITE =====
+        function shareProfile() {
+            if (navigator.share) {
+                navigator.share({ title: 'Sarah Jensen — Saha', text: 'Check out this helper on Saha!', url: window.location.href });
+            } else {
+                navigator.clipboard?.writeText(window.location.href);
+                showToast('🔗 Profile link copied to clipboard!');
+            }
+        }
+
+        function toggleFavorite(btn) {
+            const icon = btn.querySelector('span');
+            const isFilled = icon.style.fontVariationSettings.includes("'FILL' 1");
+            if (isFilled) {
+                icon.style.fontVariationSettings = "'FILL' 0";
+                btn.classList.remove('text-red-500');
+                btn.classList.add('text-slate-400');
+                showToast('💔 Removed from favorites');
+            } else {
+                icon.style.fontVariationSettings = "'FILL' 1";
+                btn.classList.remove('text-slate-400');
+                btn.classList.add('text-red-500');
+                btn.style.transform = 'scale(1.2)';
+                setTimeout(() => btn.style.transform = '', 200);
+                showToast('❤️ Added to favorites!');
+            }
+        }
+
+        // ===== SEARCH FILTER =====
+        function initSearch() {
+            const input = document.querySelector('#view-search-other input[type="text"]');
+            if (!input) return;
+            const buttons = document.querySelectorAll('#view-search-other .flex.flex-wrap button');
+            input.addEventListener('input', function () {
+                const q = this.value.toLowerCase();
+                buttons.forEach(btn => {
+                    btn.style.display = btn.textContent.toLowerCase().includes(q) ? '' : 'none';
+                });
+            });
+            // Make service buttons navigate or show toast
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const text = this.textContent.trim().toLowerCase();
+                    if (text.includes('math') || text.includes('tutor')) navigate('math-detail');
+                    else if (text.includes('tech') || text.includes('web')) navigate('category-tech');
+                    else if (text.includes('grocer') || text.includes('delivery')) navigate('category-groceries');
+                    else if (text.includes('dog') || text.includes('pet') || text.includes('walk') || text.includes('sitter')) navigate('category-pets');
+                    else showToast(`🔍 "${this.textContent.trim()}" category coming soon!`);
+                });
+            });
+        }
+
+        // ===== TAB SWITCHING (CLIENT BOOKINGS) =====
+        function initClientBookingTabs() {
+            const radios = document.querySelectorAll('input[name="client-booking-type"]');
+            radios.forEach(radio => {
+                radio.addEventListener('change', function () {
+                    const container = document.getElementById('view-client-bookings');
+                    const upcomingSection = container.querySelector('.px-4.pt-4');
+                    if (!upcomingSection) return;
+                    const allCards = upcomingSection.children;
+                    // Show all content — we'll just visually toggle
+                    if (this.value === 'Past') {
+                        // Hide upcoming, show past
+                        Array.from(allCards).forEach(child => {
+                            const text = child.textContent || '';
+                            if (text.includes('Upcoming Appointments') || text.includes('Track Helper') || text.includes('View Details')) {
+                                child.style.display = 'none';
+                            } else {
+                                child.style.display = '';
+                            }
+                        });
+                    } else {
+                        Array.from(allCards).forEach(child => child.style.display = '');
+                    }
+                });
+            });
+        }
+
+        // ===== PROVIDER BOOKING TABS =====
+        function initProviderBookingTabs() {
+            const tabBtns = document.querySelectorAll('#view-provider-bookings .flex.h-9 button');
+            const slider = document.querySelector('#view-provider-bookings .flex.h-9 > div');
+            if (tabBtns.length < 2) return;
+
+            tabBtns.forEach((btn, i) => {
+                btn.addEventListener('click', function () {
+                    // Move slider
+                    if (slider) {
+                        slider.style.transform = i === 0 ? 'translateX(0)' : 'translateX(100%)';
+                    }
+                    // Style active tab
+                    tabBtns[0].classList.toggle('text-slate-900', i === 0);
+                    tabBtns[0].classList.toggle('text-slate-500', i !== 0);
+                    tabBtns[1].classList.toggle('text-slate-900', i === 1);
+                    tabBtns[1].classList.toggle('text-slate-500', i !== 1);
+
+                    // Toggle sections
+                    const upcomingSection = document.querySelector('#view-provider-bookings .px-4.pt-6');
+                    const pastSection = document.querySelector('#view-provider-bookings .px-4.pb-8');
+                    if (upcomingSection) upcomingSection.style.display = i === 0 ? '' : 'none';
+                    if (pastSection) pastSection.style.display = i === 1 ? '' : 'none';
+                });
+            });
+        }
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', () => {
+            navigate('discovery');
+            initSearch();
+            initClientBookingTabs();
+            initProviderBookingTabs();
+
+            // Back button on client bookings
+            const cbBack = document.querySelector('#view-client-bookings .text-slate-900.flex.size-10');
+            if (cbBack) cbBack.addEventListener('click', () => goBack());
+
+            // Wallet more button styling
+            const walletMore = document.querySelector('#view-wallet button .material-symbols-outlined');
+        });
+    </script>
+</body>
+
+</html>
