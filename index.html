@@ -69,7 +69,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* ===== GLOBAL DARK OVERRIDES ===== */
+        /* dark mode overrides */
         .bg-white {
             background-color: #1a1a1a !important;
         }
@@ -773,11 +773,10 @@
 
 <body class="font-display text-slate-900 selection:bg-primary/20">
 
-    <!-- APP CONTAINER -->
+    <!-- app shell -->
     <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden pb-24 md:max-w-md md:mx-auto">
 
-        <!-- VIEWS -->
-        <!-- START_VIEW_DISCOVERY -->
+        <!-- discovery / home feed -->
         <div id="view-discovery" class="view">
             <header class="sticky top-0 z-40 w-full glass-nav px-5 pt-12 pb-4 transition-all duration-300">
                 <div class="flex items-center justify-between">
@@ -963,9 +962,9 @@
                 </section>
             </main>
         </div>
-        <!-- END_VIEW_DISCOVERY -->
+        <!-- /discovery -->
 
-        <!-- START_VIEW_MATH_DETAIL -->
+        <!-- math help detail page -->
         <div id="view-math-detail" class="view min-h-screen bg-slate-50/50">
             <!-- Header -->
             <div class="sticky top-0 z-40 w-full px-5 pt-12 pb-2 flex items-center justify-between">
@@ -988,7 +987,7 @@
                     </div>
                 </div>
 
-                <!-- Title & Info -->
+                <!-- title + stats -->
                 <h1 class="text-[28px] font-bold text-slate-900 mb-2">Math Help</h1>
                 <div class="flex items-center gap-1.5 text-[15px] mb-8">
                     <span class="text-primary font-semibold">24 Helpers Nearby</span>
@@ -1019,7 +1018,7 @@
                 </div>
 
                 <div class="w-full flex flex-col gap-4">
-                    <!-- Tutor 1 -->
+                    <!-- sarah -->
                     <div onclick="navigate('user-details')"
                         class="flex items-center justify-between group cursor-pointer">
                         <div class="flex items-center gap-4">
@@ -1051,7 +1050,7 @@
                         </div>
                     </div>
 
-                    <!-- Tutor 2 -->
+                    <!-- david -->
                     <div onclick="navigate('user-details')"
                         class="flex items-center justify-between group cursor-pointer">
                         <div class="flex items-center gap-4">
@@ -1080,7 +1079,7 @@
                         </div>
                     </div>
 
-                    <!-- Tutor 3 -->
+
                     <div onclick="navigate('user-details')"
                         class="flex items-center justify-between group cursor-pointer">
                         <div class="flex items-center gap-4">
@@ -1114,9 +1113,9 @@
                 </div>
             </main>
         </div>
-        <!-- END_VIEW_MATH_DETAIL -->
+        <!-- /math detail -->
 
-        <!-- START_VIEW_CATEGORY_GROCERIES -->
+        <!-- groceries -->
         <div id="view-category-groceries" class="view min-h-screen bg-slate-50/50">
             <div
                 class="sticky top-0 z-40 w-full px-5 pt-12 pb-2 flex items-center justify-between backdrop-blur-md bg-slate-50/90">
@@ -1176,9 +1175,9 @@
                 </div>
             </main>
         </div>
-        <!-- END_VIEW_CATEGORY_GROCERIES -->
+        <!-- /groceries -->
 
-        <!-- START_VIEW_CATEGORY_TECH -->
+        <!-- tech support -->
         <div id="view-category-tech" class="view min-h-screen bg-slate-50/50">
             <div
                 class="sticky top-0 z-40 w-full px-5 pt-12 pb-2 flex items-center justify-between backdrop-blur-md bg-slate-50/90">
@@ -1239,9 +1238,9 @@
                 </div>
             </main>
         </div>
-        <!-- END_VIEW_CATEGORY_TECH -->
+        <!-- /tech -->
 
-        <!-- START_VIEW_CATEGORY_PETS -->
+        <!-- dog walking / pet sitting -->
         <div id="view-category-pets" class="view min-h-screen bg-slate-50/50">
             <div
                 class="sticky top-0 z-40 w-full px-5 pt-12 pb-2 flex items-center justify-between backdrop-blur-md bg-slate-50/90">
@@ -1302,9 +1301,9 @@
                 </div>
             </main>
         </div>
-        <!-- END_VIEW_CATEGORY_PETS -->
+        <!-- /pets -->
 
-        <!-- START_VIEW_WALLET -->
+        <!-- wallet -->
         <div id="view-wallet" class="view min-h-screen pb-24">
             <!-- Header -->
             <div class="sticky top-0 z-40 w-full px-5 pt-12 pb-4 flex items-center justify-between">
@@ -1321,6 +1320,7 @@
 
             <main class="flex flex-col items-center px-5 pt-2">
                 <!-- Balance Card -->
+                <!-- TODO: pull balance from API -->
                 <div
                     class="w-full rounded-[28px] overflow-hidden bg-gradient-to-br from-[#1b3c58] via-[#21567d] to-[#1cb0c8] p-6 text-white shadow-lg mb-6 relative">
                     <div class="flex justify-between items-start mb-2">
@@ -1340,7 +1340,7 @@
                             class="text-emerald-400 text-[13px] font-medium border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-0.5 rounded-full tracking-wide">Available</span>
                     </div>
 
-                    <!-- Escrow Panel -->
+                    <!-- escrow -->
                     <div
                         class="w-full bg-[#252525]/80 rounded-2xl p-4 flex items-center gap-4 backdrop-blur-sm border border-white/5">
                         <div class="h-10 w-10 rounded-full bg-white/20 flex items-center justify-center shrink-0">
@@ -1368,7 +1368,7 @@
                     </button>
                 </div>
 
-                <!-- Recent Activity Wrapper -->
+                <!-- recent txns -->
                 <div
                     class="w-full bg-white rounded-t-[32px] p-6 -mx-5 px-5 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.05)] border-t border-slate-100 relative min-h-[400px]">
                     <div class="flex items-center justify-between mb-6">
@@ -1378,7 +1378,7 @@
                     </div>
 
                     <div class="flex flex-col gap-5">
-                        <!-- Activity 1 -->
+                        <!-- math tutoring txn -->
                         <div
                             class="flex items-center justify-between group cursor-pointer pb-5 border-b border-slate-100 last:border-0">
                             <div class="flex items-center gap-4">
@@ -1399,7 +1399,7 @@
                             </div>
                         </div>
 
-                        <!-- Activity 2 -->
+                        <!-- window setup -->
                         <div
                             class="flex items-center justify-between group cursor-pointer pb-5 border-b border-slate-100 last:border-0">
                             <div class="flex items-center gap-4">
@@ -1424,7 +1424,7 @@
                             </div>
                         </div>
 
-                        <!-- Activity 3 -->
+                        <!-- platform fee -->
                         <div
                             class="flex items-center justify-between group cursor-pointer pb-5 border-b border-slate-100 last:border-0">
                             <div class="flex items-center gap-4">
@@ -1446,7 +1446,7 @@
                             </div>
                         </div>
 
-                        <!-- Activity 4 -->
+                        <!-- moving help -->
                         <div
                             class="flex items-center justify-between group cursor-pointer pb-5 border-b border-slate-100 last:border-0">
                             <div class="flex items-center gap-4">
@@ -1471,9 +1471,9 @@
                 </div>
             </main>
         </div>
-        <!-- END_VIEW_WALLET -->
+        <!-- /wallet -->
 
-        <!-- START_VIEW_CLIENT_BOOKINGS -->
+        <!-- client bookings (hiring mode) -->
         <div id="view-client-bookings" class="view min-h-screen pb-24">
             <!-- Header Area -->
             <div class="sticky top-0 z-40 bg-background-light/90 backdrop-blur-md border-b border-slate-200">
@@ -1508,14 +1508,14 @@
                 </div>
             </div>
 
-            <!-- Main Content -->
+            <!-- content -->
             <div class="px-4 pt-4">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-slate-900 text-lg font-bold leading-tight">Upcoming Appointments</h3>
                     <button class="text-primary text-xs font-semibold hover:underline">See All</button>
                 </div>
 
-                <!-- Upcoming Card 1 -->
+
                 <div
                     class="group relative flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm border border-slate-100 mb-4 transition-all hover:shadow-md">
                     <div class="flex items-start justify-between gap-4">
@@ -1558,7 +1558,7 @@
                     </div>
                 </div>
 
-                <!-- Upcoming Card 2 -->
+
                 <div
                     class="group relative flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm border border-slate-100 mb-8 transition-all hover:shadow-md opacity-90">
                     <div class="flex items-start justify-between gap-4">
@@ -1596,7 +1596,7 @@
                     <h3 class="text-slate-900 text-lg font-bold leading-tight">Past Services</h3>
                 </div>
 
-                <!-- Past Card 1 -->
+                <!-- past: electrical -->
                 <div
                     class="group relative flex flex-col gap-3 rounded-2xl bg-white/5 p-4 shadow-sm border border-white/8 mb-4">
                     <div class="flex items-center justify-between">
@@ -1620,7 +1620,7 @@
                     </div>
                 </div>
 
-                <!-- Past Card 2 -->
+                <!-- past: gardening -->
                 <div
                     class="group relative flex flex-col gap-3 rounded-2xl bg-white/5 p-4 shadow-sm border border-white/8 mb-4">
                     <div class="flex items-center justify-between">
@@ -1654,11 +1654,11 @@
                 </div>
             </div>
         </div>
-        <!-- END_VIEW_CLIENT_BOOKINGS -->
+        <!-- /client bookings -->
 
-        <!-- START_VIEW_PROVIDER_BOOKINGS -->
+        <!-- provider bookings (earning mode) -->
         <div id="view-provider-bookings" class="view min-h-screen pb-24">
-            <!-- Header Section with Frosted Glass Effect -->
+            <!-- header w/ frosted glass -->
             <div
                 class="sticky top-0 z-40 backdrop-blur-xl bg-background-light/80 border-b border-slate-200/50 pt-safe-top">
                 <div class="px-4 pt-12 pb-3 flex justify-between items-center">
@@ -1683,14 +1683,14 @@
                 </div>
             </div>
 
-            <!-- Scrollable Content -->
+            <!-- job cards -->
             <div class="px-4 pt-6 pb-2">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-lg font-bold text-slate-900">Upcoming Jobs</h2>
                     <span class="text-xs font-medium text-primary">View Calendar</span>
                 </div>
 
-                <!-- Card 1 -->
+                <!-- math tutoring job -->
                 <div class="mb-5 relative overflow-hidden rounded-2xl bg-white shadow-card border border-slate-100">
                     <div class="absolute top-0 right-0 p-4">
                         <span
@@ -1727,7 +1727,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Map Snapshot Area -->
+                    <!-- mini map -->
                     <div class="bg-slate-50 p-3 flex items-center justify-between border-t border-slate-100">
                         <div class="flex items-center gap-3">
                             <div class="relative w-12 h-12 rounded-lg overflow-hidden bg-slate-200 shadow-inner">
@@ -1750,7 +1750,7 @@
                     </div>
                 </div>
 
-                <!-- Card 2 -->
+                <!-- deep cleaning job -->
                 <div
                     class="mb-5 relative overflow-hidden rounded-2xl bg-white shadow-card border border-slate-100 opacity-90">
                     <div class="absolute top-0 right-0 p-4">
@@ -1791,13 +1791,13 @@
                 </div>
             </div>
 
-            <!-- Completed Section (Preview) -->
+            <!-- completed jobs -->
             <div class="px-4 pb-8">
                 <h2 class="text-lg font-bold text-slate-900 mb-4">Past Jobs</h2>
                 <div
                     class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 divide-y divide-slate-100">
 
-                    <!-- Past Job Item 1 -->
+
                     <div
                         class="p-4 flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer">
                         <div class="flex items-center gap-3">
@@ -1828,7 +1828,7 @@
                         </div>
                     </div>
 
-                    <!-- Past Job Item 2 -->
+
                     <div
                         class="p-4 flex items-center justify-between hover:bg-slate-50 transition-colors cursor-pointer">
                         <div class="flex items-center gap-3">
@@ -1860,9 +1860,9 @@
                 </div>
             </div>
         </div>
-        <!-- END_VIEW_PROVIDER_BOOKINGS -->
+        <!-- /provider bookings -->
 
-        <!-- START_VIEW_SEARCH_OTHER -->
+        <!-- search / browse all services -->
         <div id="view-search-other" class="view min-h-screen bg-slate-50/50 pb-24">
             <div class="sticky top-0 z-40 w-full px-5 pt-12 pb-4 flex items-center gap-3 backdrop-blur-md bg-white">
                 <button onclick="navigate('discovery')"
@@ -2012,9 +2012,9 @@
                 </div>
             </main>
         </div>
-        <!-- END_VIEW_SEARCH_OTHER -->
+        <!-- /search -->
 
-        <!-- START_VIEW_PROFILE -->
+        <!-- profile settings -->
         <div id="view-profile" class="view min-h-screen bg-slate-50/50 pb-24">
             <div class="px-5 pt-12 pb-6 border-b border-slate-200 bg-white">
                 <div class="flex items-center gap-4">
@@ -2077,9 +2077,9 @@
                 </div>
             </main>
         </div>
-        <!-- END_VIEW_PROFILE -->
+        <!-- /profile -->
 
-        <!-- START_VIEW_USER_DETAILS -->
+        <!-- helper profile page -->
         <div id="view-user-details" class="view min-h-screen bg-slate-50/50 pb-24">
             <div
                 class="sticky top-0 z-40 w-full px-5 pt-12 pb-4 flex items-center justify-between backdrop-blur-md bg-white border-b border-slate-200/50">
@@ -2169,7 +2169,7 @@
                 </div>
             </main>
         </div>
-        <!-- END_VIEW_USER_DETAILS -->
+        <!-- /helper profile -->
 
         <!-- BOTTOM NAV -->
         <nav class="fixed bottom-0 left-0 right-0 z-50 glass-nav pb-safe md:max-w-md md:mx-auto">
@@ -2201,12 +2201,12 @@
         </nav>
     </div>
 
-    <!-- TOAST CONTAINER -->
+    <!-- toasts -->
     <div id="toast-container" class="toast-container"></div>
 
-    <!-- ===================== MODALS ===================== -->
+    <!-- modals -->
 
-    <!-- BOOKING MODAL -->
+    <!-- booking form -->
     <div id="modal-booking" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-booking')">
         <div class="modal-sheet">
             <div class="modal-handle"></div>
@@ -2251,7 +2251,7 @@
         </div>
     </div>
 
-    <!-- BOOKING SUCCESS MODAL -->
+    <!-- booking confirmed -->
     <div id="modal-booking-success" class="modal-overlay center-modal"
         onclick="if(event.target===this)closeModal('modal-booking-success')">
         <div class="modal-center">
@@ -2269,7 +2269,7 @@
         </div>
     </div>
 
-    <!-- REVIEW MODAL -->
+    <!-- rate & review -->
     <div id="modal-review" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-review')">
         <div class="modal-sheet">
             <div class="modal-handle"></div>
@@ -2301,7 +2301,7 @@
         </div>
     </div>
 
-    <!-- ADD MONEY MODAL -->
+    <!-- add money -->
     <div id="modal-add-money" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-add-money')">
         <div class="modal-sheet">
             <div class="modal-handle"></div>
@@ -2346,7 +2346,7 @@
         </div>
     </div>
 
-    <!-- WITHDRAW MODAL -->
+    <!-- withdraw -->
     <div id="modal-withdraw" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-withdraw')">
         <div class="modal-sheet">
             <div class="modal-handle"></div>
@@ -2390,7 +2390,7 @@
         </div>
     </div>
 
-    <!-- CHAT MODAL -->
+    <!-- chat -->
     <div id="modal-chat" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-chat')">
         <div class="modal-sheet" style="max-height:85vh;display:flex;flex-direction:column;padding-bottom:0;">
             <div class="modal-handle"></div>
@@ -2426,7 +2426,7 @@
         </div>
     </div>
 
-    <!-- TRACKER MODAL -->
+    <!-- tracker -->
     <div id="modal-tracker" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-tracker')">
         <div class="modal-sheet">
             <div class="modal-handle"></div>
@@ -2466,7 +2466,7 @@
         </div>
     </div>
 
-    <!-- CALL DIALOG -->
+    <!-- call dialog -->
     <div id="modal-call" class="modal-overlay center-modal" onclick="if(event.target===this)closeModal('modal-call')">
         <div class="modal-center">
             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuChCSyq2kW94PHUH4oNt31ZNGJH3zMF5W1A7UuuOHCsdBEpnWfdCPGf7-aAHMk_UwIZzGOWYdvuo9XJcIrnu-9lwRMtfuXwJWiBjSLXlX4nMbYUG5sI9mqZaiKLUwHKNo_0Zna2foAhnp0fRJ_B00OrL7oBn_iaIx4ktNLoKaJMB0T3LaioUc6Ds_ELZCHOfj0ysADi1xKQ85iafwgH96HNky2KKVHwO8iSHYV9HGcl2CAVLbsf84HLplMcbXaEfnr66Mtgp5NxOVI"
@@ -2484,7 +2484,7 @@
         </div>
     </div>
 
-    <!-- BOOKING DETAIL MODAL -->
+    <!-- booking detail -->
     <div id="modal-booking-detail" class="modal-overlay"
         onclick="if(event.target===this)closeModal('modal-booking-detail')">
         <div class="modal-sheet">
@@ -2536,7 +2536,7 @@
         </div>
     </div>
 
-    <!-- PERSONAL INFO MODAL -->
+    <!-- personal info -->
     <div id="modal-personal-info" class="modal-overlay"
         onclick="if(event.target===this)closeModal('modal-personal-info')">
         <div class="modal-sheet">
@@ -2565,7 +2565,7 @@
         </div>
     </div>
 
-    <!-- SAVED ADDRESSES MODAL -->
+    <!-- saved addresses -->
     <div id="modal-addresses" class="modal-overlay" onclick="if(event.target===this)closeModal('modal-addresses')">
         <div class="modal-sheet">
             <div class="modal-handle"></div>
@@ -2601,7 +2601,7 @@
         </div>
     </div>
 
-    <!-- HELP & SUPPORT MODAL -->
+    <!-- help & support -->
     <div id="modal-help-support" class="modal-overlay"
         onclick="if(event.target===this)closeModal('modal-help-support')">
         <div class="modal-sheet">
@@ -2654,7 +2654,7 @@
         </div>
     </div>
 
-    <!-- SIGN OUT CONFIRMATION -->
+    <!-- sign out confirmation -->
     <div id="modal-signout" class="modal-overlay center-modal"
         onclick="if(event.target===this)closeModal('modal-signout')">
         <div class="modal-center">
@@ -2674,7 +2674,7 @@
         </div>
     </div>
 
-    <!-- NOTIFICATIONS MODAL -->
+    <!-- notifications -->
     <div id="modal-notifications" class="modal-overlay"
         onclick="if(event.target===this)closeModal('modal-notifications')">
         <div class="modal-sheet">
@@ -2729,13 +2729,14 @@
         </div>
     </div>
 
-    <!-- ===================== APP LOGIC ===================== -->
+    <!-- js -->
     <script>
         let isProviderMode = false;
         let navHistory = ['discovery'];
         let currentRating = 0;
 
-        // ===== NAVIGATION =====
+        // nav
+        // TODO: probably should use pushState for proper back-button support
         function navigate(viewId) {
             document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn span:first-child').forEach(el => {
@@ -2814,7 +2815,7 @@
             navigate('bookings');
         }
 
-        // ===== MODAL SYSTEM =====
+        // modals
         function openModal(modalId) {
             document.getElementById(modalId)?.classList.add('active');
         }
@@ -2822,7 +2823,7 @@
             document.getElementById(modalId)?.classList.remove('active');
         }
 
-        // ===== TOAST =====
+        // toast helper
         function showToast(message, type) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
@@ -2831,10 +2832,10 @@
             const icon = iconMap[type] || '';
             toast.innerHTML = (icon ? `<span class="material-symbols-outlined text-lg">${icon}</span>` : '') + message;
             container.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
+            setTimeout(() => toast.remove(), 3000); // might want to tweak this timing
         }
 
-        // ===== BOOKING =====
+        // booking flow
         function openBookingModal(title, price, isUrgent) {
             document.getElementById('booking-modal-title').textContent = (isUrgent ? '⚡ ' : '') + title;
             document.getElementById('booking-modal-price').textContent = price;
@@ -2863,7 +2864,7 @@
             setTimeout(() => openModal('modal-booking-success'), 300);
         }
 
-        // ===== REVIEW =====
+        // review / rating
         function setRating(stars) {
             currentRating = stars;
             const labels = ['', 'Poor', 'Fair', 'Good', 'Great', 'Excellent!'];
@@ -2880,7 +2881,7 @@
             currentRating = 0;
         }
 
-        // ===== WALLET =====
+        // wallet actions
         function processWalletAction(action) {
             const id = action === 'added' ? 'add-money-amount' : 'withdraw-amount';
             const amount = document.getElementById(id).value;
@@ -2889,7 +2890,7 @@
             showToast(`💰 ₹${amount} ${action} successfully!`, 'success');
         }
 
-        // ===== CHAT =====
+        // chat
         function sendChatMessage() {
             const input = document.getElementById('chat-input');
             const msg = input.value.trim();
@@ -2919,7 +2920,7 @@
             }, 1200);
         }
 
-        // ===== ADD HELPER =====
+        // add/remove helper
         function addHelper(btn, name) {
             const icon = btn.querySelector('span');
             if (icon.textContent === 'add') {
@@ -2935,7 +2936,7 @@
             }
         }
 
-        // ===== SHARE & FAVORITE =====
+        // share + fav
         function shareProfile() {
             if (navigator.share) {
                 navigator.share({ title: 'Sarah Jensen — Saha', text: 'Check out this helper on Saha!', url: window.location.href });
@@ -2963,7 +2964,8 @@
             }
         }
 
-        // ===== SEARCH FILTER =====
+        // search filter logic
+        // FIXME: should debounce this
         function initSearch() {
             const input = document.querySelector('#view-search-other input[type="text"]');
             if (!input) return;
@@ -2987,7 +2989,7 @@
             });
         }
 
-        // ===== TAB SWITCHING (CLIENT BOOKINGS) =====
+        // client booking tabs
         function initClientBookingTabs() {
             const radios = document.querySelectorAll('input[name="client-booking-type"]');
             radios.forEach(radio => {
@@ -2997,6 +2999,7 @@
                     if (!upcomingSection) return;
                     const allCards = upcomingSection.children;
                     // Show all content — we'll just visually toggle
+                    // lol this is hacky but works
                     if (this.value === 'Past') {
                         // Hide upcoming, show past
                         Array.from(allCards).forEach(child => {
@@ -3014,7 +3017,7 @@
             });
         }
 
-        // ===== PROVIDER BOOKING TABS =====
+        // provider booking tabs
         function initProviderBookingTabs() {
             const tabBtns = document.querySelectorAll('#view-provider-bookings .flex.h-9 button');
             const slider = document.querySelector('#view-provider-bookings .flex.h-9 > div');
@@ -3041,7 +3044,7 @@
             });
         }
 
-        // ===== INIT =====
+        // boot
         document.addEventListener('DOMContentLoaded', () => {
             navigate('discovery');
             initSearch();
