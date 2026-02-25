@@ -14,7 +14,7 @@ a soul and a much better-looking dark mode.
 
   ### The "Parents Left Behind" problem: ### 
   A lot of us are moving away for work or studies
-    (shoutout to everyone heading to China or Ireland). Our parents are tech-savvy, but they
+    Our parents are tech-savvy, but they
     shouldn't have to wait for a weekend phone call to fix a Windows error.
     The Student Hustle: Being a student in India is expensive. If you’re good at Math, Tech, or
     just don't mind carrying groceries, you should be able to earn while helping your
